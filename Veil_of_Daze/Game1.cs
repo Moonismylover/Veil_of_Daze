@@ -6,8 +6,20 @@ namespace Veil_of_Daze
 {
     public class Game1 : Game
     {
+        Rectangle window;
+
+        Texture2D mainMenuBackground;
+        Rectangle mainMenuBackgroundRect;
+
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        
+        enum Screen
+        {
+            mainMenu,
+            veilOfDaze,
+            endGame
+        }
 
         public Game1()
         {
@@ -18,7 +30,10 @@ namespace Veil_of_Daze
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            window = new Rectangle(0, 0, 930, 630);
+            _graphics.PreferredBackBufferWidth = 930;
+            _graphics.PreferredBackBufferHeight = 630;
+            _graphics.ApplyChanges();
 
             base.Initialize();
         }
@@ -27,7 +42,7 @@ namespace Veil_of_Daze
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            mainMenuBackground = Content.Load<Texture2D>("red_bg");
         }
 
         protected override void Update(GameTime gameTime)
@@ -35,16 +50,21 @@ namespace Veil_of_Daze
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            //if (Screen == Screen.mainMenu)
+            //{
+
+            //}
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
-            // TODO: Add your drawing code here
+            _spriteBatch.Begin();
+            _spriteBatch.Draw(mainMenuBackground, window, Color.White);
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
