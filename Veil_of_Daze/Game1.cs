@@ -6,20 +6,29 @@ namespace Veil_of_Daze
 {
     public class Game1 : Game
     {
-        Rectangle window;
-
-        Texture2D mainMenuBackground;
-        Rectangle mainMenuBackgroundRect;
-
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         
         enum Screen
         {
-            mainMenu,
+            main,
+            menu,
             veilOfDaze,
             endGame
         }
+
+        Screen screen;
+
+        Rectangle window;
+
+        Texture2D mainBg;
+
+        Texture2D mainText;
+        Rectangle mainTextRect;
+
+        float seconds;
+
+        MouseState mouseState;
 
         public Game1()
         {
@@ -30,10 +39,16 @@ namespace Veil_of_Daze
 
         protected override void Initialize()
         {
+            screen = Screen.main;
+
             window = new Rectangle(0, 0, 930, 630);
             _graphics.PreferredBackBufferWidth = 930;
             _graphics.PreferredBackBufferHeight = 630;
             _graphics.ApplyChanges();
+
+            mainTextRect = new Rectangle(30, 130, 500, 300);
+
+            seconds = 0;
 
             base.Initialize();
         }
@@ -42,7 +57,8 @@ namespace Veil_of_Daze
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            mainMenuBackground = Content.Load<Texture2D>("red_bg");
+            mainBg = Content.Load<Texture2D>("red_bg");
+            mainText = Content.Load<Texture2D>("main_text");
         }
 
         protected override void Update(GameTime gameTime)
@@ -50,10 +66,20 @@ namespace Veil_of_Daze
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            //if (Screen == Screen.mainMenu)
-            //{
+            mouseState = Mouse.GetState();
 
-            //}
+            this.Window.Title = mouseState.Position.ToString();
+
+            seconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (screen == Screen.main)
+            {
+                if (mouseState.LeftButton == ButtonState.Pressed)
+                {
+                    screen = Screen.menu;
+                }
+            }
+
 
             base.Update(gameTime);
         }
@@ -63,8 +89,26 @@ namespace Veil_of_Daze
             GraphicsDevice.Clear(Color.Black);
 
             _spriteBatch.Begin();
-            _spriteBatch.Draw(mainMenuBackground, window, Color.White);
-            _spriteBatch.End();
+
+            if (screen == Screen.main)
+            {
+                _spriteBatch.Draw(mainBg, window, Color.White);
+                _spriteBatch.Draw(mainText, mainTextRect, Color.White);
+            }
+            else if (screen == Screen.menu)
+            {
+
+            }
+            else if (screen == Screen.veilOfDaze)
+            {
+
+            }
+            else if (screen == Screen.endGame)
+            {
+
+            }
+
+                _spriteBatch.End();
 
             base.Draw(gameTime);
         }
