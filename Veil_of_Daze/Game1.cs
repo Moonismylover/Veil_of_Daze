@@ -26,6 +26,12 @@ namespace Veil_of_Daze
         Texture2D mainText;
         Rectangle mainTextRect;
 
+        Texture2D butterfly;
+        Rectangle butterflyRect;
+
+        Texture2D flower;
+        Rectangle flowerRect;
+
         float seconds;
 
         MouseState mouseState;
@@ -47,6 +53,8 @@ namespace Veil_of_Daze
             _graphics.ApplyChanges();
 
             mainTextRect = new Rectangle(30, 130, 500, 300);
+            flowerRect = new Rectangle(370, 190, 100, 100);
+            butterflyRect = new Rectangle(60, 250, 150, 150);
 
             seconds = 0;
 
@@ -59,6 +67,8 @@ namespace Veil_of_Daze
 
             mainBg = Content.Load<Texture2D>("red_bg");
             mainText = Content.Load<Texture2D>("main_text");
+            butterfly = Content.Load<Texture2D>("butterfly");
+            flower = Content.Load<Texture2D>("flower");
         }
 
         protected override void Update(GameTime gameTime)
@@ -94,6 +104,8 @@ namespace Veil_of_Daze
             {
                 _spriteBatch.Draw(mainBg, window, Color.White);
                 _spriteBatch.Draw(mainText, mainTextRect, Color.White);
+                _spriteBatch.Draw(butterfly, butterflyRect, Color.White);
+                _spriteBatch.Draw(flower, flowerRect, Color.White);
             }
             else if (screen == Screen.menu)
             {
