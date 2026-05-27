@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace Veil_of_Daze
 {
@@ -13,6 +14,7 @@ namespace Veil_of_Daze
         {
             main,
             menu,
+            chamberOfLegends,
             veilOfDaze,
             endGame
         }
@@ -20,15 +22,26 @@ namespace Veil_of_Daze
         Screen screen;
 
         Rectangle window;
-
+        
+        // Backgrounds
         Texture2D mainBg;
+        Texture2D menuBg;
 
+        // Text & Titles
         Texture2D mainText;
         Rectangle mainTextRect;
 
+        Texture2D menuTitle;
+        Rectangle menuTitleRect;
+
+        Texture2D characterTitle;
+        Rectangle characterTitleRect;
+
+        // Visual elements
         Texture2D butterfly;
         Rectangle butterflyRect;
 
+        // Buttons 
         Texture2D play;
         Rectangle playRect;
 
@@ -38,8 +51,10 @@ namespace Veil_of_Daze
         Texture2D exit;
         Rectangle exitRect;
 
+        // Time 
         float seconds;
 
+        // Mouse & Keyboard
         MouseState mouseState;
         MouseState previousMouseState;
 
@@ -59,8 +74,15 @@ namespace Veil_of_Daze
             _graphics.PreferredBackBufferHeight = 630;
             _graphics.ApplyChanges();
 
+            // Text & Titles
             mainTextRect = new Rectangle(30, 130, 500, 300);
+            menuTitleRect = new Rectangle(380, 20, 150, 70);
+            characterTitleRect = new Rectangle(160, 20, 600, 80);
+
+            // Visual elements
             butterflyRect = new Rectangle(60, 250, 150, 150);
+
+            // Buttons
             playRect = new Rectangle(370, 160, 120, 50);
             menuRect = new Rectangle(370, 210, 120, 50);
             exitRect = new Rectangle(370, 260, 120, 50);
@@ -74,9 +96,19 @@ namespace Veil_of_Daze
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            // Backgrounds
             mainBg = Content.Load<Texture2D>("red_bg");
+            menuBg = Content.Load<Texture2D>("menubg");
+
+            // Text & Titles
             mainText = Content.Load<Texture2D>("main_text");
+            menuTitle = Content.Load<Texture2D>("menu_title");
+            characterTitle = Content.Load<Texture2D>("characters_title");
+
+            //Visual elements
             butterfly = Content.Load<Texture2D>("butterfly");
+
+            // Buttons
             play = Content.Load<Texture2D>("play");
             menu = Content.Load<Texture2D>("menu");
             exit = Content.Load<Texture2D>("exit");
@@ -98,7 +130,7 @@ namespace Veil_of_Daze
             {
                 if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && playRect.Contains(mouseState.Position))
                 {
-                    screen = Screen.veilOfDaze;
+                    screen = Screen.chamberOfLegends;
                 }
 
                 if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && menuRect.Contains(mouseState.Position))
@@ -111,14 +143,29 @@ namespace Veil_of_Daze
                     Exit();
                 }
             }
-            
-            if (screen == Screen.menu)
+
+            else if (screen == Screen.menu)
+            {
+
+            }
+
+            else if (screen == Screen.chamberOfLegends)
+            {
+
+            }
+
+            else if (screen == Screen.veilOfDaze)
+            {
+
+            }
+
+            else if (screen == Screen.endGame)
             {
 
             }
 
 
-            base.Update(gameTime);
+                base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -136,14 +183,24 @@ namespace Veil_of_Daze
                 _spriteBatch.Draw(menu, menuRect, Color.White);
                 _spriteBatch.Draw(exit, exitRect, Color.White);
             }
+
             else if (screen == Screen.menu)
             {
-
+                //_spriteBatch.Draw(menuBg, window, Color.White);
+                _spriteBatch.Draw(menuTitle, menuTitleRect, Color.White);
+               
             }
+
+            else if (screen == Screen.chamberOfLegends)
+            {
+                _spriteBatch.Draw(characterTitle, characterTitleRect, Color.White);
+            }   
+
             else if (screen == Screen.veilOfDaze)
             {
 
             }
+
             else if (screen == Screen.endGame)
             {
 
