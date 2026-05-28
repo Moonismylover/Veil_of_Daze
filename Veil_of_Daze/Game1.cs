@@ -31,8 +31,8 @@ namespace Veil_of_Daze
         Texture2D mainText;
         Rectangle mainTextRect;
 
-        Texture2D menuTitle;
-        Rectangle menuTitleRect;
+        Texture2D settingsTitle;
+        Rectangle settingsTitleRect;
 
         Texture2D characterTitle;
         Rectangle characterTitleRect;
@@ -42,14 +42,14 @@ namespace Veil_of_Daze
         Rectangle butterflyRect;
 
         // Buttons 
-        Texture2D play;
-        Rectangle playRect;
+        Texture2D playButton;
+        Rectangle playButtonRect;
 
-        Texture2D menu;
-        Rectangle menuRect;
+        Texture2D settingsButton;
+        Rectangle settingsButtonRect;
 
-        Texture2D exit;
-        Rectangle exitRect;
+        Texture2D quitButton;
+        Rectangle quitButtonRect;
 
         // Time 
         float seconds;
@@ -76,16 +76,16 @@ namespace Veil_of_Daze
 
             // Text & Titles
             mainTextRect = new Rectangle(30, 130, 500, 300);
-            menuTitleRect = new Rectangle(380, 20, 150, 70);
+            settingsTitleRect = new Rectangle(380, 20, 150, 70);
             characterTitleRect = new Rectangle(160, 20, 600, 80);
 
             // Visual elements
             butterflyRect = new Rectangle(60, 250, 150, 150);
 
             // Buttons
-            playRect = new Rectangle(370, 160, 120, 50);
-            menuRect = new Rectangle(370, 210, 120, 50);
-            exitRect = new Rectangle(370, 260, 120, 50);
+            playButtonRect = new Rectangle(370, 160, 120, 50);
+            settingsButtonRect = new Rectangle(370, 210, 120, 50);
+            quitButtonRect = new Rectangle(370, 260, 120, 50);
  
             seconds = 0;
 
@@ -98,20 +98,20 @@ namespace Veil_of_Daze
 
             // Backgrounds
             mainBg = Content.Load<Texture2D>("red_bg");
-            menuBg = Content.Load<Texture2D>("menubg");
+            //menuBg = Content.Load<Texture2D>("menubg");
 
             // Text & Titles
             mainText = Content.Load<Texture2D>("main_text");
-            menuTitle = Content.Load<Texture2D>("menu_title");
-            characterTitle = Content.Load<Texture2D>("characters_title");
+            settingsTitle = Content.Load<Texture2D>("settings_title");
+            characterTitle = Content.Load<Texture2D>("chamberoflegends_title");
 
             //Visual elements
             butterfly = Content.Load<Texture2D>("butterfly");
 
             // Buttons
-            play = Content.Load<Texture2D>("play");
-            menu = Content.Load<Texture2D>("menu");
-            exit = Content.Load<Texture2D>("exit");
+            playButton = Content.Load<Texture2D>("playbutton");
+            settingsButton = Content.Load<Texture2D>("settingsbutton");
+            quitButton = Content.Load<Texture2D>("quitbutton");
         }
 
         protected override void Update(GameTime gameTime)
@@ -128,17 +128,17 @@ namespace Veil_of_Daze
 
             if (screen == Screen.main)
             {
-                if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && playRect.Contains(mouseState.Position))
+                if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && playButtonRect.Contains(mouseState.Position))
                 {
                     screen = Screen.chamberOfLegends;
                 }
 
-                if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && menuRect.Contains(mouseState.Position))
+                if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && settingsButtonRect.Contains(mouseState.Position))
                 {
                     screen = Screen.menu;
                 }
 
-                if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && exitRect.Contains(mouseState.Position))
+                if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && quitButtonRect.Contains(mouseState.Position))
                 {
                     Exit();
                 }
@@ -179,15 +179,15 @@ namespace Veil_of_Daze
                 _spriteBatch.Draw(mainBg, window, Color.White);
                 _spriteBatch.Draw(mainText, mainTextRect, Color.White);
                 _spriteBatch.Draw(butterfly, butterflyRect, Color.White);
-                _spriteBatch.Draw(play, playRect, Color.White);
-                _spriteBatch.Draw(menu, menuRect, Color.White);
-                _spriteBatch.Draw(exit, exitRect, Color.White);
+                _spriteBatch.Draw(playButton, playButtonRect, Color.White);
+                _spriteBatch.Draw(settingsButton, settingsButtonRect, Color.White);
+                _spriteBatch.Draw(quitButton, quitButtonRect, Color.White);
             }
 
             else if (screen == Screen.menu)
             {
                 //_spriteBatch.Draw(menuBg, window, Color.White);
-                _spriteBatch.Draw(menuTitle, menuTitleRect, Color.White);
+                _spriteBatch.Draw(settingsTitle, settingsTitleRect, Color.White);
                
             }
 

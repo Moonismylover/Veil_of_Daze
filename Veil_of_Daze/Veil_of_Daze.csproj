@@ -11,6 +11,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Content\chamberoflegends_title.png" />
     <None Remove="Content\character_title.png" />
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
