@@ -28,6 +28,7 @@ namespace Veil_of_Daze
         Texture2D mainBg;
         Texture2D menuBg;
         Texture2D chamberOfLegendsBg;
+        Texture2D veilOfDazeBg;
 
         // Text & Titles
         Texture2D mainText;
@@ -2025,6 +2026,7 @@ namespace Veil_of_Daze
             mainBg = Content.Load<Texture2D>("red_bg");
             //menuBg = Content.Load<Texture2D>("menubg");
             chamberOfLegendsBg = Content.Load<Texture2D>("chamberoflegends_bg");
+            veilOfDazeBg = Content.Load<Texture2D>("download (9)");
 
             // Text & Titles
             mainText = Content.Load<Texture2D>("main_text");
@@ -2126,6 +2128,7 @@ namespace Veil_of_Daze
 
             else if (screen == Screen.veilOfDaze)
             {
+                _spriteBatch.Draw(veilOfDazeBg, window, Color.White);
                 foreach (Rectangle wall in walls)
                 {
                     _spriteBatch.Draw(lava, wall, Color.White);
