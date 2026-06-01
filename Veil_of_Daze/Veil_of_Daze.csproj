@@ -16,6 +16,7 @@
     <None Remove="Content\exa.png" />
     <None Remove="Content\exaa.png" />
     <None Remove="Content\exaaa.png" />
+    <None Remove="Content\veilofdaze_title.png" />
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
   </ItemGroup>
