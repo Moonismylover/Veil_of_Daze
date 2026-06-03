@@ -54,14 +54,16 @@ namespace Veil_of_Daze
         Texture2D yukiBackward;
         Texture2D yukiLeft;
         Texture2D yukiRight;
-        Rectangle yukiRect;
+        Rectangle yukiTextureRect;
+        Rectangle yukiCollisionRect;
 
         Texture2D currentSeraphina;
         Texture2D seraphinaForward;
         Texture2D seraphinaBackward;
         Texture2D seraphinaLeft;
         Texture2D seraphinaRight;
-        Rectangle seraphinaRect;
+        Rectangle seraphinaTextureRect;
+        Rectangle seraphinaCollisionRect;
 
         // Buttons 
         Texture2D playButton;
@@ -80,7 +82,6 @@ namespace Veil_of_Daze
         MouseState mouseState;
         MouseState previousMouseState;
         KeyboardState KeyboardState;
-
 
         public Game1()
         {
@@ -107,8 +108,10 @@ namespace Veil_of_Daze
             butterflyRect = new Rectangle(60, 250, 150, 150);
 
             // Characters 
-            yukiRect = new Rectangle(455, 610, 20, 25);
-            seraphinaRect = new Rectangle(455, 590, 20, 25);
+            yukiTextureRect = new Rectangle(455, 610, 20, 25);
+            yukiCollisionRect = new Rectangle(4);
+            seraphinaTextureRect = new Rectangle(455, 590, 20, 25);
+            seraphinaCollisionRect = new Rectangle();
 
             // Buttons
             playButtonRect = new Rectangle(550, 60, 120, 50);
@@ -2118,53 +2121,53 @@ namespace Veil_of_Daze
 
             else if (screen == Screen.veilOfDaze)
             {
-                Rectangle oldPosition = yukiRect;
+                Rectangle oldPosition = yukiTextureRect ;
 
                 if (KeyboardState.IsKeyDown(Keys.W) || KeyboardState.IsKeyDown(Keys.Up))
                 {
                     currentYuki = yukiForward;
-                    yukiRect.Y -= 2;
+                    yukiTextureRect.Y -= 2;
                 }
                 else if (KeyboardState.IsKeyDown(Keys.S) || KeyboardState.IsKeyDown(Keys.Down))
                 {
                     currentYuki = yukiBackward;
-                    yukiRect.Y += 2;
+                    yukiTextureRect.Y += 2;
                 }
                 else if (KeyboardState.IsKeyDown(Keys.A) || KeyboardState.IsKeyDown(Keys.Left))
                 {
                     currentYuki = yukiLeft;
-                    yukiRect.X -= 2;
+                    yukiTextureRect.X -= 2;
                 }
                 else if (KeyboardState.IsKeyDown(Keys.D) || KeyboardState.IsKeyDown(Keys.Right))
                 {   
                     currentYuki = yukiRight;
-                    yukiRect.X += 2;
+                    yukiTextureRect.X += 2;
                 }
 
                 foreach (Rectangle wall in walls)
                 {
-                    if (yukiRect.Intersects(wall))
+                    if (yukiTextureRect.Intersects(wall))
                     {
-                        yukiRect = new Rectangle(oldPosition.X, oldPosition.Y, oldPosition.Width, oldPosition.Height);
+                        yukiTextureRect = new Rectangle(oldPosition.X, oldPosition.Y, oldPosition.Width, oldPosition.Height);
                         break;
                     }
                 }
 
-                if (yukiRect.Left < 0)
+                if (yukiTextureRect.Left < 0)
                 {
-                    yukiRect.X = 0;
+                    yukiTextureRect.X = 0;
                 }
-                if (yukiRect.Right > window.Width)
+                if (yukiTextureRect.Right > window.Width)
                 {
-                    yukiRect.X = window.Width - yukiRect.Width;
+                    yukiTextureRect.X = window.Width - yukiTextureRect.Width;
                 }
-                if (yukiRect.Top < 0)
+                if (yukiTextureRect.Top < 0)
                 {
-                    yukiRect.Y = 0;
+                    yukiTextureRect.Y = 0;
                 }
-                if (yukiRect.Bottom > window.Height)
+                if (yukiTextureRect.Bottom > window.Height)
                 {
-                    yukiRect.Y = window.Height - yukiRect.Height;
+                    yukiTextureRect.Y = window.Height - yukiTextureRect.Height;
                 }
             }
 
@@ -2212,7 +2215,7 @@ namespace Veil_of_Daze
                 {
                     _spriteBatch.Draw(lava, wall, Color.White);
                 }
-                _spriteBatch.Draw(currentYuki, yukiRect, Color.White);
+                _spriteBatch.Draw(currentYuki, yukiTextureRect, Color.White);
 
             }
 
