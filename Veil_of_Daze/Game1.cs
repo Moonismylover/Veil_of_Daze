@@ -107,8 +107,8 @@ namespace Veil_of_Daze
             butterflyRect = new Rectangle(60, 250, 150, 150);
 
             // Characters 
-            yukiRect = new Rectangle(455, 590, 25, 35);
-            seraphinaRect = new Rectangle(455, 590, 25, 35);
+            yukiRect = new Rectangle(455, 610, 20, 25);
+            seraphinaRect = new Rectangle(455, 590, 20, 25);
 
             // Buttons
             playButtonRect = new Rectangle(550, 60, 120, 50);
@@ -2118,7 +2118,8 @@ namespace Veil_of_Daze
 
             else if (screen == Screen.veilOfDaze)
             {
-                
+                Rectangle oldPosition = yukiRect;
+
                 if (KeyboardState.IsKeyDown(Keys.W) || KeyboardState.IsKeyDown(Keys.Up))
                 {
                     currentYuki = yukiForward;
@@ -2144,10 +2145,10 @@ namespace Veil_of_Daze
                 {
                     if (yukiRect.Intersects(wall))
                     {
-                        
+                        yukiRect = new Rectangle(oldPosition.X, oldPosition.Y, oldPosition.Width, oldPosition.Height);
+                        break;
                     }
                 }
-
 
                 if (yukiRect.Left < 0)
                 {
