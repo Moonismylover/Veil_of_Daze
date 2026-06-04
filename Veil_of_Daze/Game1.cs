@@ -21,6 +21,8 @@ namespace Veil_of_Daze
             endGame
         }
 
+        // !!!!!!!!!!!!!! REMOVE RECTANGLE COLLISON
+
         Screen screen;
 
         Rectangle window;
@@ -46,7 +48,14 @@ namespace Veil_of_Daze
         // Visual elements
         Texture2D butterfly;
         Rectangle butterflyRect;
-        Texture2D lava;
+
+        Texture2D bush;
+
+        Texture2D treasureOne;
+        Texture2D treasureTwo;
+        Texture2D treasureThree;
+
+
 
         // Characters
         Texture2D currentYuki;
@@ -83,6 +92,8 @@ namespace Veil_of_Daze
         MouseState previousMouseState;
         KeyboardState KeyboardState;
 
+        Texture2D rectTexture;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -108,8 +119,8 @@ namespace Veil_of_Daze
             butterflyRect = new Rectangle(60, 250, 150, 150);
 
             // Characters 
-            yukiTextureRect = new Rectangle(455, 610, 20, 25);
-            yukiCollisionRect = new Rectangle(4);
+            yukiTextureRect = new Rectangle(455, 610, 30, 40);
+            yukiCollisionRect = new Rectangle(yukiTextureRect.X + 10, yukiTextureRect.Y - 20, yukiTextureRect.Width - 20, yukiTextureRect.Height - 26);
             seraphinaTextureRect = new Rectangle(455, 590, 20, 25);
             seraphinaCollisionRect = new Rectangle();
 
@@ -2056,7 +2067,7 @@ namespace Veil_of_Daze
 
             // Visual elements
             butterfly = Content.Load<Texture2D>("butterfly");
-            lava = Content.Load<Texture2D>("exaaaa");
+            bush = Content.Load<Texture2D>("exaaaa");
 
             // Characters 
             yukiForward = Content.Load<Texture2D>("Yuki_forward");
@@ -2076,6 +2087,9 @@ namespace Veil_of_Daze
             playButton = Content.Load<Texture2D>("playbutton");
             settingsButton = Content.Load<Texture2D>("settingsbutton");
             quitButton = Content.Load<Texture2D>("quitbutton");
+
+            // Rectangle for debugginh
+            rectTexture = Content.Load<Texture2D>("rectangle");
         }
 
         protected override void Update(GameTime gameTime)
@@ -2121,53 +2135,56 @@ namespace Veil_of_Daze
 
             else if (screen == Screen.veilOfDaze)
             {
-                Rectangle oldPosition = yukiTextureRect ;
+                yukiTextureRect.X = yukiCollisionRect.X - 10;
+                yukiTextureRect.Y = yukiCollisionRect.Y - 20;
+
+                Rectangle oldPosition = yukiCollisionRect;
 
                 if (KeyboardState.IsKeyDown(Keys.W) || KeyboardState.IsKeyDown(Keys.Up))
                 {
                     currentYuki = yukiForward;
-                    yukiTextureRect.Y -= 2;
+                    yukiCollisionRect.Y -= 2;
                 }
                 else if (KeyboardState.IsKeyDown(Keys.S) || KeyboardState.IsKeyDown(Keys.Down))
                 {
                     currentYuki = yukiBackward;
-                    yukiTextureRect.Y += 2;
+                    yukiCollisionRect.Y += 2;
                 }
                 else if (KeyboardState.IsKeyDown(Keys.A) || KeyboardState.IsKeyDown(Keys.Left))
                 {
                     currentYuki = yukiLeft;
-                    yukiTextureRect.X -= 2;
+                    yukiCollisionRect.X -= 2;
                 }
                 else if (KeyboardState.IsKeyDown(Keys.D) || KeyboardState.IsKeyDown(Keys.Right))
                 {   
                     currentYuki = yukiRight;
-                    yukiTextureRect.X += 2;
+                    yukiCollisionRect.X += 2;
                 }
 
                 foreach (Rectangle wall in walls)
                 {
-                    if (yukiTextureRect.Intersects(wall))
+                    if (yukiCollisionRect.Intersects(wall))
                     {
-                        yukiTextureRect = new Rectangle(oldPosition.X, oldPosition.Y, oldPosition.Width, oldPosition.Height);
+                        yukiCollisionRect = new Rectangle(oldPosition.X, oldPosition.Y, oldPosition.Width, oldPosition.Height);
                         break;
                     }
                 }
 
-                if (yukiTextureRect.Left < 0)
+                if (yukiCollisionRect.Left < 0)
                 {
-                    yukiTextureRect.X = 0;
+                    yukiCollisionRect.X = 0;
                 }
-                if (yukiTextureRect.Right > window.Width)
+                if (yukiCollisionRect.Right > window.Width)
                 {
-                    yukiTextureRect.X = window.Width - yukiTextureRect.Width;
+                    yukiCollisionRect.X = window.Width - yukiCollisionRect.Width;
                 }
-                if (yukiTextureRect.Top < 0)
+                if (yukiCollisionRect.Top < 0)
                 {
-                    yukiTextureRect.Y = 0;
+                    yukiCollisionRect.Y = 0;
                 }
-                if (yukiTextureRect.Bottom > window.Height)
+                if (yukiCollisionRect.Bottom > window.Height)
                 {
-                    yukiTextureRect.Y = window.Height - yukiTextureRect.Height;
+                    yukiCollisionRect.Y = window.Height - yukiCollisionRect.Height;
                 }
             }
 
@@ -2213,9 +2230,11 @@ namespace Veil_of_Daze
             {
                 foreach (Rectangle wall in walls)
                 {
-                    _spriteBatch.Draw(lava, wall, Color.White);
+                    _spriteBatch.Draw(bush, wall, Color.White);
                 }
+                
                 _spriteBatch.Draw(currentYuki, yukiTextureRect, Color.White);
+                //_spriteBatch.Draw(rectTexture, yukiCollisionRect, Color.White);
 
             }
 

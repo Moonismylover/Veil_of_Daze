@@ -73,18 +73,6 @@
 /processorParam:TextureFormat=Color
 /build:intro_bg.jpg
 
-#begin Lady_Yuki.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Lady_Yuki.png
-
 #begin musicbutton.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -109,6 +97,30 @@
 /processorParam:TextureFormat=Color
 /build:mutebutton.png
 
+#begin orangetreasure.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:orangetreasure.png
+
+#begin pinktreasure.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:pinktreasure.png
+
 #begin playbutton.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -120,6 +132,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:playbutton.png
+
+#begin purpletreasure.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:purpletreasure.png
 
 #begin quitbutton.png
 /importer:TextureImporter
@@ -133,7 +157,7 @@
 /processorParam:TextureFormat=Color
 /build:quitbutton.png
 
-#begin red_bg.png
+#begin rectangle.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -143,7 +167,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:red_bg.png
+/build:rectangle.png
 
 #begin Seraphina_backward.png
 /importer:TextureImporter
@@ -300,16 +324,4 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Yuki_right.png
-
-#begin Yuki.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Yuki.png
 
