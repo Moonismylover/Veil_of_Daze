@@ -2151,7 +2151,7 @@ namespace Veil_of_Daze
                     yukiCollisionRect.Y += 2;
                 }
                 else if (KeyboardState.IsKeyDown(Keys.A) || KeyboardState.IsKeyDown(Keys.Left))
-                {
+                { 
                     currentYuki = yukiLeft;
                     yukiCollisionRect.X -= 2;
                 }
