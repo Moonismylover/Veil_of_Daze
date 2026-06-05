@@ -51,12 +51,6 @@ namespace Veil_of_Daze
 
         Texture2D bush;
 
-        Texture2D treasureOne;
-        Texture2D treasureTwo;
-        Texture2D treasureThree;
-
-
-
         // Characters
         Texture2D currentYuki;
         Texture2D yukiForward;
@@ -86,6 +80,33 @@ namespace Veil_of_Daze
 
         // Time 
         float seconds;
+
+        // Treasure Boxes
+        Texture2D treasureOne;
+        Rectangle treasureOneRect;
+        Texture2D treasureTwo;
+        Rectangle treasureTwoRect;
+        Texture2D treasureThree;
+        Rectangle treasureThreeRect;
+
+        Rectangle treasureOneSpotOneRect;
+        Rectangle treasureOneSpotTwoRect;
+        Rectangle treasureOneSpotThreeRect;
+        Rectangle treasureOneSpotFourRect;
+
+        Rectangle treasureTwoSpotOneRect;
+        Rectangle treasureTwoSpotTwoRect;
+        Rectangle treasureTwoSpotThreeRect;
+        Rectangle treasureTwoSpotFourRect;
+
+        Rectangle treasureThreeSpotOneRect;
+        Rectangle treasureThreeSpotTwoRect;
+        Rectangle treasureThreeSpotThreeRect;
+        Rectangle treasureThreeSpotFourRect;
+
+        int spotNum;
+
+        Random generator = new Random();
 
         // Mouse & Keyboard
         MouseState mouseState;
@@ -117,6 +138,28 @@ namespace Veil_of_Daze
 
             // Visual elements
             butterflyRect = new Rectangle(60, 250, 150, 150);
+
+            // Treasure Boxes
+            treasureOneRect = new Rectangle(490, 440, 20, 20);
+
+            treasureOneSpotOneRect = new Rectangle(11, 100, 20, 20);
+            treasureOneSpotTwoRect= new Rectangle(860, 10, 20, 20);
+            treasureOneSpotThreeRect = new Rectangle(291, 250, 20, 20);
+            treasureOneSpotFourRect = new Rectangle(850, 471, 20, 20);
+
+            treasureTwoRect = new Rectangle(200, 10, 20, 20);
+
+            treasureTwoSpotOneRect = new Rectangle(100, 491, 20, 20);
+            treasureTwoSpotTwoRect = new Rectangle(490, 440, 20, 20);
+            treasureTwoSpotThreeRect = new Rectangle(640, 241, 20, 20);
+            treasureTwoSpotFourRect = new Rectangle(200, 10, 20, 20);
+
+            treasureThreeRect = new Rectangle(850, 600, 20, 20);
+
+            treasureThreeSpotOneRect = new Rectangle(520, 70, 20, 20);
+            treasureThreeSpotTwoRect = new Rectangle(780, 350, 20, 20);
+            treasureThreeSpotThreeRect = new Rectangle(300, 600, 20, 20);
+            treasureThreeSpotFourRect = new Rectangle(850, 600, 20, 20);
 
             // Characters 
             yukiTextureRect = new Rectangle(455, 610, 30, 40);
@@ -2068,6 +2111,9 @@ namespace Veil_of_Daze
             // Visual elements
             butterfly = Content.Load<Texture2D>("butterfly");
             bush = Content.Load<Texture2D>("exaaaa");
+            treasureOne = Content.Load<Texture2D>("pinktreasure");
+            treasureTwo = Content.Load<Texture2D>("purpletreasure");
+            treasureThree = Content.Load<Texture2D>("orangetreasure");
 
             // Characters 
             yukiForward = Content.Load<Texture2D>("Yuki_forward");
@@ -2110,6 +2156,33 @@ namespace Veil_of_Daze
                 if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && playButtonRect.Contains(mouseState.Position))
                 {
                     screen = Screen.veilOfDaze;
+
+                    spotNum = generator.Next(1, 5);
+
+                    if (spotNum == 1)
+                    {
+                        treasureOneRect = treasureOneSpotOneRect;
+                        treasureTwoRect = treasureTwoSpotOneRect;
+                        treasureThreeRect = treasureThreeSpotOneRect;
+                    }
+                    else if (spotNum == 2)
+                    {
+                        treasureOneRect = treasureOneSpotTwoRect;
+                        treasureTwoRect = treasureTwoSpotTwoRect;
+                        treasureThreeRect = treasureThreeSpotTwoRect;
+                    }
+                    else if (spotNum == 3)
+                    {
+                        treasureOneRect = treasureOneSpotThreeRect;
+                        treasureTwoRect = treasureTwoSpotThreeRect;
+                        treasureThreeRect = treasureThreeSpotThreeRect;
+                    }
+                    else if (spotNum == 4)
+                    {
+                        treasureOneRect = treasureOneSpotFourRect;
+                        treasureTwoRect = treasureTwoSpotFourRect;
+                        treasureThreeRect = treasureThreeSpotFourRect;
+                    }
                 }
 
                 if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && settingsButtonRect.Contains(mouseState.Position))
@@ -2135,6 +2208,7 @@ namespace Veil_of_Daze
 
             else if (screen == Screen.veilOfDaze)
             {
+
                 yukiTextureRect.X = yukiCollisionRect.X - 10;
                 yukiTextureRect.Y = yukiCollisionRect.Y - 20;
 
@@ -2168,6 +2242,19 @@ namespace Veil_of_Daze
                         yukiCollisionRect = new Rectangle(oldPosition.X, oldPosition.Y, oldPosition.Width, oldPosition.Height);
                         break;
                     }
+                }
+
+                if (yukiCollisionRect.Intersects(treasureOneRect))
+                {
+                    treasureOneRect = Rectangle.Empty;
+                }
+                if (yukiCollisionRect.Intersects(treasureTwoRect))
+                {
+                    treasureTwoRect = Rectangle.Empty;
+                }
+                if (yukiCollisionRect.Intersects(treasureThreeRect))
+                {
+                    treasureThreeRect = Rectangle.Empty;
                 }
 
                 if (yukiCollisionRect.Left < 0)
@@ -2232,8 +2319,27 @@ namespace Veil_of_Daze
                 {
                     _spriteBatch.Draw(bush, wall, Color.White);
                 }
-                
+
                 _spriteBatch.Draw(currentYuki, yukiTextureRect, Color.White);
+                _spriteBatch.Draw(treasureOne, treasureOneRect, Color.White);
+                _spriteBatch.Draw(treasureTwo, treasureTwoRect, Color.White);
+                _spriteBatch.Draw(treasureThree, treasureThreeRect, Color.White);
+
+                //_spriteBatch.Draw(treasureOne, treasureOneSpotOneRect, Color.White);
+                //_spriteBatch.Draw(treasureOne, treasureOneSpotTwoRect, Color.White);
+                //_spriteBatch.Draw(treasureOne, treasureOneSpotThreeRect, Color.White);
+                //_spriteBatch.Draw(treasureOne, treasureOneSpotFourRect, Color.White);
+
+                //_spriteBatch.Draw(treasureTwo, treasureTwoSpotOneRect, Color.White);
+                //_spriteBatch.Draw(treasureTwo, treasureTwoSpotTwoRect, Color.White);
+                //_spriteBatch.Draw(treasureTwo, treasureTwoSpotThreeRect, Color.White);
+                //_spriteBatch.Draw(treasureTwo, treasureTwoSpotFourRect, Color.White);
+
+                //_spriteBatch.Draw(treasureThree, treasureThreeSpotOneRect, Color.White);
+                //_spriteBatch.Draw(treasureThree, treasureThreeSpotTwoRect, Color.White);
+                //_spriteBatch.Draw(treasureThree, treasureThreeSpotThreeRect, Color.White);
+                //_spriteBatch.Draw(treasureThree, treasureThreeSpotFourRect, Color.White);
+
                 //_spriteBatch.Draw(rectTexture, yukiCollisionRect, Color.White);
 
             }
