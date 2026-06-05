@@ -27,6 +27,12 @@ namespace Veil_of_Daze
 
         Rectangle window;
 
+        // Bools
+        bool treasureacquired = false;
+        bool treasureOneCollected = false;
+        bool treasureTwoCollected = false;
+        bool treasureThreeCollected = false;
+
         // Backgrounds
         Texture2D introBg;
         Texture2D menuBg;
@@ -48,8 +54,13 @@ namespace Veil_of_Daze
         // Visual elements
         Texture2D butterfly;
         Rectangle butterflyRect;
-
         Texture2D bush;
+
+        // Exit Portals
+        Texture2D activePortal;
+        Rectangle activePortalRect;
+        Texture2D inactivePortal;
+        Rectangle inactivePortalRect;
 
         // Characters
         Texture2D currentYuki;
@@ -160,6 +171,10 @@ namespace Veil_of_Daze
             treasureThreeSpotTwoRect = new Rectangle(780, 350, 20, 20);
             treasureThreeSpotThreeRect = new Rectangle(300, 600, 20, 20);
             treasureThreeSpotFourRect = new Rectangle(850, 600, 20, 20);
+
+            // Exit Portals
+            activePortalRect = new Rectangle(735, 110, 80, 90);
+            inactivePortalRect = new Rectangle(735, 110, 80, 90);
 
             // Characters 
             yukiTextureRect = new Rectangle(455, 610, 30, 40);
@@ -2115,6 +2130,10 @@ namespace Veil_of_Daze
             treasureTwo = Content.Load<Texture2D>("purpletreasure");
             treasureThree = Content.Load<Texture2D>("orangetreasure");
 
+            // Exit Portals
+            activePortal = Content.Load<Texture2D>("active_portal");
+            inactivePortal = Content.Load<Texture2D>("inactive_portal");
+
             // Characters 
             yukiForward = Content.Load<Texture2D>("Yuki_forward");
             yukiBackward = Content.Load<Texture2D>("Yuki_backward");
@@ -2208,7 +2227,6 @@ namespace Veil_of_Daze
 
             else if (screen == Screen.veilOfDaze)
             {
-
                 yukiTextureRect.X = yukiCollisionRect.X - 10;
                 yukiTextureRect.Y = yukiCollisionRect.Y - 20;
 
@@ -2247,15 +2265,20 @@ namespace Veil_of_Daze
                 if (yukiCollisionRect.Intersects(treasureOneRect))
                 {
                     treasureOneRect = Rectangle.Empty;
+                    treasureOneCollected = true;
                 }
                 if (yukiCollisionRect.Intersects(treasureTwoRect))
                 {
                     treasureTwoRect = Rectangle.Empty;
+                    treasureTwoCollected = true;
                 }
                 if (yukiCollisionRect.Intersects(treasureThreeRect))
                 {
                     treasureThreeRect = Rectangle.Empty;
+                    treasureThreeCollected = true;
                 }
+
+                treasureacquired = treasureOneCollected && treasureTwoCollected && treasureThreeCollected;
 
                 if (yukiCollisionRect.Left < 0)
                 {
@@ -2273,6 +2296,12 @@ namespace Veil_of_Daze
                 {
                     yukiCollisionRect.Y = window.Height - yukiCollisionRect.Height;
                 }
+
+                if (yukiCollisionRect.Intersects(activePortalRect) && treasureacquired)
+                {
+                    screen = Screen.endGame;
+                }
+                
             }
 
             else if (screen == Screen.endGame)
@@ -2320,10 +2349,20 @@ namespace Veil_of_Daze
                     _spriteBatch.Draw(bush, wall, Color.White);
                 }
 
+                if (treasureacquired)
+                {
+                    _spriteBatch.Draw(activePortal, activePortalRect, Color.White);
+                }
+                else
+                {
+                    _spriteBatch.Draw(inactivePortal, inactivePortalRect, Color.White);
+                }
+
                 _spriteBatch.Draw(currentYuki, yukiTextureRect, Color.White);
                 _spriteBatch.Draw(treasureOne, treasureOneRect, Color.White);
                 _spriteBatch.Draw(treasureTwo, treasureTwoRect, Color.White);
                 _spriteBatch.Draw(treasureThree, treasureThreeRect, Color.White);
+
 
                 //_spriteBatch.Draw(treasureOne, treasureOneSpotOneRect, Color.White);
                 //_spriteBatch.Draw(treasureOne, treasureOneSpotTwoRect, Color.White);
