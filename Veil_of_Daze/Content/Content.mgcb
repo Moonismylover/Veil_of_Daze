@@ -25,6 +25,18 @@
 /processorParam:TextureFormat=Color
 /build:active_portal.png
 
+#begin blackScreen.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:blackScreen.png
+
 #begin butterfly.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -72,6 +84,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:flower.png
+
+#begin fr.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:fr.png
 
 #begin inactive_portal.png
 /importer:TextureImporter
@@ -181,6 +205,18 @@
 /processorParam:TextureFormat=Color
 /build:quitbutton.png
 
+#begin qwert.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:qwert.png
+
 #begin rectangle.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -265,6 +301,18 @@
 /processorParam:TextureFormat=Color
 /build:settingsbutton.png
 
+#begin spotlight.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:spotlight.png
+
 #begin title_chamberoflegends.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -300,6 +348,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:title_veilofdaze.png
+
+#begin Untitled design.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Untitled design.png
 
 #begin Yuki_backward.png
 /importer:TextureImporter
