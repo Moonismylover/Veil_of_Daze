@@ -12,11 +12,19 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Content\3.png" />
+    <None Remove="Content\Aldy_backward.png" />
+    <None Remove="Content\Aldy_forward.png" />
+    <None Remove="Content\Aldy_left.png" />
+    <None Remove="Content\Aldy_right.png" />
     <None Remove="Content\chamberoflegends_title.png" />
     <None Remove="Content\character_title.png" />
     <None Remove="Content\exa.png" />
     <None Remove="Content\exaa.png" />
     <None Remove="Content\exaaa.png" />
+    <None Remove="Content\Satan_backward.png" />
+    <None Remove="Content\Satan_forward.png" />
+    <None Remove="Content\Satan_left.png" />
+    <None Remove="Content\Satan_right.png" />
     <None Remove="Content\treasure_one.png" />
     <None Remove="Content\veilofdaze_title.png" />
     <None Remove="Content\y.png" />

@@ -52,7 +52,6 @@ namespace Veil_of_Daze
         List<Rectangle> walls;
 
         // Spotlights
-        Texture2D blackScreen;
         Texture2D spotlight;
         Rectangle spotlightRect;
 
@@ -68,6 +67,14 @@ namespace Veil_of_Daze
         Rectangle inactivePortalRect;
 
         // Characters
+        Texture2D currentCharacter;
+        Texture2D currentCharacterForward;
+        Texture2D currentCharacterBackward;
+        Texture2D currentCharacterLeft;
+        Texture2D currentCharacterRight;
+        Rectangle currentCharacterTextureRect;
+        Rectangle currentCharacterCollisionRect;
+
         Texture2D currentYuki;
         Texture2D yukiForward;
         Texture2D yukiBackward;
@@ -83,6 +90,22 @@ namespace Veil_of_Daze
         Texture2D seraphinaRight;
         Rectangle seraphinaTextureRect;
         Rectangle seraphinaCollisionRect;
+
+        Texture2D currentAldy;
+        Texture2D aldyForward;
+        Texture2D aldyBackward;
+        Texture2D aldyLeft;
+        Texture2D aldyRight;
+        Rectangle aldyTextureRect;
+        Rectangle aldyCollisionRect;
+
+        Texture2D currentSatan;
+        Texture2D satanForward;
+        Texture2D satanBackward;
+        Texture2D satanLeft;
+        Texture2D satanRight;
+        Rectangle satanTextureRect;
+        Rectangle satanCollisionRect;
 
         // Buttons 
         Texture2D playButton;
@@ -150,7 +173,7 @@ namespace Veil_of_Daze
             // Text & Titles
             veilOfDazeTitleRect = new Rectangle(220, 35, 500, 300);
             settingsTitleRect = new Rectangle(300, 20, 300, 70);
-            chamberOfLegendsTitleRect = new Rectangle(130, 20, 630, 80);
+            chamberOfLegendsTitleRect = new Rectangle(125, 20, 650, 80);
 
             // Visual elements
             butterflyRect = new Rectangle(60, 250, 150, 150);
@@ -189,6 +212,10 @@ namespace Veil_of_Daze
             yukiCollisionRect = new Rectangle(yukiTextureRect.X + 10, yukiTextureRect.Y - 20, yukiTextureRect.Width - 20, yukiTextureRect.Height - 26);
             seraphinaTextureRect = new Rectangle(455, 610, 30, 40);
             seraphinaCollisionRect = new Rectangle(seraphinaTextureRect.X + 10, seraphinaTextureRect.Y - 20, seraphinaTextureRect.Width - 20, seraphinaTextureRect.Height - 26);
+            aldyTextureRect = new Rectangle(455, 610, 30, 40);
+            aldyCollisionRect = new Rectangle(yukiTextureRect.X + 10, yukiTextureRect.Y - 20, yukiTextureRect.Width - 20, yukiTextureRect.Height - 26);
+            satanTextureRect = new Rectangle(455, 610, 30, 40);
+            satanCollisionRect = new Rectangle(seraphinaTextureRect.X + 10, seraphinaTextureRect.Y - 20, seraphinaTextureRect.Width - 20, seraphinaTextureRect.Height - 26);
 
             // Buttons
             playButtonRect = new Rectangle(550, 60, 120, 50);
@@ -2111,7 +2138,6 @@ namespace Veil_of_Daze
             walls.Add(new Rectangle(910, 620, 10, 10));
             walls.Add(new Rectangle(920, 620, 10, 10));
 
-
             seconds = 0;
 
             base.Initialize();
@@ -2157,8 +2183,20 @@ namespace Veil_of_Daze
             seraphinaLeft = Content.Load<Texture2D>("Seraphina_left");
             seraphinaRight = Content.Load<Texture2D>("Seraphina_right");
 
+            aldyForward = Content.Load<Texture2D>("Aldy_forward");
+            aldyBackward = Content.Load<Texture2D>("Aldy_backward");
+            aldyLeft = Content.Load<Texture2D>("Aldy_left");
+            aldyRight = Content.Load<Texture2D>("Aldy_right");
+
+            satanForward = Content.Load<Texture2D>("Satan_forward");
+            satanBackward = Content.Load<Texture2D>("Satan_backward");
+            satanLeft = Content.Load<Texture2D>("Satan_left");
+            satanRight = Content.Load<Texture2D>("Satan_right");
+
             currentYuki = yukiForward;
             currentSeraphina = seraphinaForward;
+            currentAldy = aldyForward;
+            currentSatan = satanForward;
 
             // Buttons
             playButton = Content.Load<Texture2D>("playbutton");
@@ -2186,7 +2224,7 @@ namespace Veil_of_Daze
             {
                 if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && playButtonRect.Contains(mouseState.Position))
                 {
-                    screen = Screen.veilOfDaze;
+                    screen = Screen.chamberOfLegends;
 
                     spotNum = generator.Next(1, 5);
 
@@ -2240,35 +2278,51 @@ namespace Veil_of_Daze
             else if (screen == Screen.veilOfDaze)
             {
                 // Texture & Collision Rectangle Position Sync
-                yukiTextureRect.X = yukiCollisionRect.X - 10;
-                yukiTextureRect.Y = yukiCollisionRect.Y - 20;
 
-                seraphinaTextureRect.X = seraphinaCollisionRect.X - 10;
-                seraphinaTextureRect.Y = seraphinaCollisionRect.Y - 20;
+                currentCharacterTextureRect.X = currentCharacterCollisionRect.X - 10;
+                currentCharacterTextureRect.Y = currentCharacterCollisionRect.Y - 20;
+                //yukiTextureRect.X = yukiCollisionRect.X - 10;
+                //yukiTextureRect.Y = yukiCollisionRect.Y - 20;
 
-                Rectangle oldPositionYuki = yukiCollisionRect;
-                Rectangle oldPositionSeraphina = seraphinaCollisionRect;
+                //seraphinaTextureRect.X = seraphinaCollisionRect.X - 10;
+                //seraphinaTextureRect.Y = seraphinaCollisionRect.Y - 20;
+
+                Rectangle oldPosition = currentCharacterCollisionRect;
+                //Rectangle oldPositionYuki = yukiCollisionRect;
+                //Rectangle oldPositionSeraphina = seraphinaCollisionRect;
 
                 // Sprite Movement
                 if (KeyboardState.IsKeyDown(Keys.W) || KeyboardState.IsKeyDown(Keys.Up))
                 {
-                    currentYuki = yukiForward;
-                    yukiCollisionRect.Y -= 2;
+                    currentCharacter = currentCharacterForward;
+                    currentCharacterCollisionRect.Y -= 2;
+
+                    //currentYuki = yukiForward;
+                    //yukiCollisionRect.Y -= 2;
                 }
                 else if (KeyboardState.IsKeyDown(Keys.S) || KeyboardState.IsKeyDown(Keys.Down))
                 {
-                    currentYuki = yukiBackward;
-                    yukiCollisionRect.Y += 2;
+                    currentCharacter = currentCharacterBackward;    
+                    currentCharacterCollisionRect.Y += 2;
+
+                    //currentYuki = yukiBackward;
+                    //yukiCollisionRect.Y += 2;
                 }
                 else if (KeyboardState.IsKeyDown(Keys.A) || KeyboardState.IsKeyDown(Keys.Left))
                 {
-                    currentYuki = yukiLeft;
-                    yukiCollisionRect.X -= 2;
+                    //currentYuki = yukiLeft;
+                    //yukiCollisionRect.X -= 2;
+
+                    currentCharacter = currentCharacterLeft;
+                    currentCharacterCollisionRect.X -= 2;
                 }
                 else if (KeyboardState.IsKeyDown(Keys.D) || KeyboardState.IsKeyDown(Keys.Right))
                 {
-                    currentYuki = yukiRight;
-                    yukiCollisionRect.X += 2;
+                    currentCharacter = currentCharacterRight;
+                    currentCharacterCollisionRect.X += 2;
+
+                    //currentYuki = yukiRight;
+                    //yukiCollisionRect.X += 2;
                 }
 
                 // Collision Detection
@@ -2276,104 +2330,144 @@ namespace Veil_of_Daze
                 {
                     if (yukiCollisionRect.Intersects(wall))
                     {
-                        yukiCollisionRect = new Rectangle(oldPositionYuki.X, oldPositionYuki.Y, oldPositionYuki.Width, oldPositionYuki.Height);
-                        break;
-                    }
-                    if (seraphinaCollisionRect.Intersects(wall))
-                    {
-                        seraphinaCollisionRect = new Rectangle(oldPositionSeraphina.X, oldPositionSeraphina.Y, oldPositionSeraphina.Width, oldPositionSeraphina.Height);
+                        yukiCollisionRect = new Rectangle(oldPosition.X, oldPosition.Y, oldPosition.Width, oldPosition.Height);
                         break;
                     }
                 }
 
                 // Spotlight Position Sync
 
-                spotlightRect.X = yukiTextureRect.Center.X - spotlightRect.Width / 2;
-                spotlightRect.Y = yukiTextureRect.Center.Y - spotlightRect.Height / 2;
+                spotlightRect.X = currentCharacterTextureRect.Center.X - spotlightRect.Width / 2;
+                spotlightRect.Y = currentCharacterTextureRect.Center.Y - spotlightRect.Height / 2;
 
-                spotlightRect.X = seraphinaTextureRect.Center.X - spotlightRect.Width / 2;
-                spotlightRect.Y = seraphinaTextureRect.Center.Y - spotlightRect.Height / 2;
+                //spotlightRect.X = yukiTextureRect.Center.X - spotlightRect.Width / 2;
+                //spotlightRect.Y = yukiTextureRect.Center.Y - spotlightRect.Height / 2;
+
+                //spotlightRect.X = seraphinaTextureRect.Center.X - spotlightRect.Width / 2;
+                //spotlightRect.Y = seraphinaTextureRect.Center.Y - spotlightRect.Height / 2;
 
                 // Treasure Collection
-                if (yukiCollisionRect.Intersects(treasureOneRect))
+                if (currentCharacterCollisionRect.Intersects(treasureOneRect))
                 {
                     treasureOneRect = Rectangle.Empty;
                     treasureOneCollected = true;
                 }
-                if (yukiCollisionRect.Intersects(treasureTwoRect))
+
+                if (currentCharacterCollisionRect.Intersects(treasureTwoRect))
                 {
                     treasureTwoRect = Rectangle.Empty;
                     treasureTwoCollected = true;
                 }
-                if (yukiCollisionRect.Intersects(treasureThreeRect))
+
+                if (currentCharacterCollisionRect.Intersects(treasureThreeRect))
                 {
                     treasureThreeRect = Rectangle.Empty;
                     treasureThreeCollected = true;
                 }
 
-                if (seraphinaTextureRect.Intersects(treasureOneRect))
-                {
-                    treasureOneRect = Rectangle.Empty;
-                    treasureOneCollected = true;
-                }
-                if (seraphinaTextureRect.Intersects(treasureTwoRect))
-                {
-                    treasureTwoRect = Rectangle.Empty;
-                    treasureTwoCollected = true;
-                }
-                if (seraphinaTextureRect.Intersects(treasureThreeRect))
-                {
-                    treasureThreeRect = Rectangle.Empty;
-                    treasureThreeCollected = true;
-                }
+                //if (yukiCollisionRect.Intersects(treasureOneRect))
+                //{
+                //    treasureOneRect = Rectangle.Empty;
+                //    treasureOneCollected = true;
+                //}
+                //if (yukiCollisionRect.Intersects(treasureTwoRect))
+                //{
+                //    treasureTwoRect = Rectangle.Empty;
+                //    treasureTwoCollected = true;
+                //}
+                //if (yukiCollisionRect.Intersects(treasureThreeRect))
+                //{
+                //    treasureThreeRect = Rectangle.Empty;
+                //    treasureThreeCollected = true;
+                //}
+
+                //if (seraphinaTextureRect.Intersects(treasureOneRect))
+                //{
+                //    treasureOneRect = Rectangle.Empty;
+                //    treasureOneCollected = true;
+                //}
+                //if (seraphinaTextureRect.Intersects(treasureTwoRect))
+                //{
+                //    treasureTwoRect = Rectangle.Empty;
+                //    treasureTwoCollected = true;
+                //}
+                //if (seraphinaTextureRect.Intersects(treasureThreeRect))
+                //{
+                //    treasureThreeRect = Rectangle.Empty;
+                //    treasureThreeCollected = true;
+                //}
 
                 treasureacquired = treasureOneCollected && treasureTwoCollected && treasureThreeCollected;
 
                 // Boundary Check
-                if (yukiCollisionRect.Left < 0)
+                if (currentCharacterCollisionRect.Left < 0)
                 {
-                    yukiCollisionRect.X = 0;
-                }
-                if (yukiCollisionRect.Right > window.Width)
-                {
-                    yukiCollisionRect.X = window.Width - yukiCollisionRect.Width;
-                }
-                if (yukiCollisionRect.Top < 0)
-                {
-                    yukiCollisionRect.Y = 0;
-                }
-                if (yukiCollisionRect.Bottom > window.Height)
-                {
-                    yukiCollisionRect.Y = window.Height - yukiCollisionRect.Height;
+                    currentCharacterCollisionRect.X = 0;
                 }
 
-                if (seraphinaCollisionRect.Left < 0)
+                if (currentCharacterCollisionRect.Right > window.Width)
                 {
-                    seraphinaCollisionRect.X = 0;
+                    currentCharacterCollisionRect.X = window.Width - currentCharacterCollisionRect.Width;
                 }
-                if (seraphinaCollisionRect.Right > window.Width)
+
+                if (currentCharacterCollisionRect.Top < 0)
                 {
-                    seraphinaCollisionRect.X = window.Width - seraphinaCollisionRect.Width;
+                    currentCharacterCollisionRect.Y = 0;
                 }
-                if (seraphinaCollisionRect.Top < 0)
+
+                if (currentCharacterCollisionRect.Bottom > window.Height)
                 {
-                    seraphinaCollisionRect.Y = 0;
+                    currentCharacterCollisionRect.Y = window.Height - currentCharacterCollisionRect.Height;
                 }
-                if (seraphinaCollisionRect.Bottom > window.Height)
-                {
-                    seraphinaCollisionRect.Y = window.Height - seraphinaCollisionRect.Height;
-                }
+
+
+                //if (yukiCollisionRect.Left < 0)
+                //{
+                //    yukiCollisionRect.X = 0;
+                //}
+                //if (yukiCollisionRect.Right > window.Width)
+                //{
+                //    yukiCollisionRect.X = window.Width - yukiCollisionRect.Width;
+                //}
+                //if (yukiCollisionRect.Top < 0)
+                //{
+                //    yukiCollisionRect.Y = 0;
+                //}
+                //if (yukiCollisionRect.Bottom > window.Height)
+                //{
+                //    yukiCollisionRect.Y = window.Height - yukiCollisionRect.Height;
+                ////}
+
+                //if (seraphinaCollisionRect.Left < 0)
+                //{
+                //    seraphinaCollisionRect.X = 0;
+                //}
+                //if (seraphinaCollisionRect.Right > window.Width)
+                //{
+                //    seraphinaCollisionRect.X = window.Width - seraphinaCollisionRect.Width;
+                //}
+                //if (seraphinaCollisionRect.Top < 0)
+                //{
+                //    seraphinaCollisionRect.Y = 0;
+                //}
+                //if (seraphinaCollisionRect.Bottom > window.Height)
+                //{
+                //    seraphinaCollisionRect.Y = window.Height - seraphinaCollisionRect.Height;
+                //}
 
                 // Portal Activation
-                if (yukiCollisionRect.Intersects(activePortalRect) && treasureacquired)
+                if (currentCharacterCollisionRect.Intersects(activePortalRect) && treasureacquired)
                 {
                     screen = Screen.endGame;
                 }
-                if (seraphinaCollisionRect.Intersects(activePortalRect) && treasureacquired)
-                {
-                    screen = Screen.endGame;
-                }
-
+                //if (yukiCollisionRect.Intersects(activePortalRect) && treasureacquired)
+                //{
+                //    screen = Screen.endGame;
+                //}
+                //else if (seraphinaCollisionRect.Intersects(activePortalRect) && treasureacquired)
+                //{
+                //    screen = Screen.endGame;
+                //}
                 else if (screen == Screen.endGame)
                 {
 
@@ -2435,7 +2529,7 @@ namespace Veil_of_Daze
                 }
 
                 _spriteBatch.Draw(currentYuki, yukiTextureRect, Color.White);
-                _spriteBatch.Draw(currentSeraphina, seraphinaTextureRect, Color.White);
+                //_spriteBatch.Draw(currentSeraphina, seraphinaTextureRect, Color.White);
 
                 //_spriteBatch.Draw(rectTexture, yukiCollisionRect, Color.White);
 
