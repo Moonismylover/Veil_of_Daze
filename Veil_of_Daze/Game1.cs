@@ -99,13 +99,13 @@ namespace Veil_of_Daze
         Rectangle aldyTextureRect;
         Rectangle aldyCollisionRect;
 
-        Texture2D currentSatan;
-        Texture2D satanForward;
-        Texture2D satanBackward;
-        Texture2D satanLeft;
-        Texture2D satanRight;
-        Rectangle satanTextureRect;
-        Rectangle satanCollisionRect;
+        Texture2D currentAzrael;
+        Texture2D azraelForward;
+        Texture2D azraelBackward;
+        Texture2D azraelLeft;
+        Texture2D azraelRight;
+        Rectangle azraelTextureRect;
+        Rectangle azraelCollisionRect;
 
         // Buttons 
         Texture2D playButton;
@@ -214,8 +214,8 @@ namespace Veil_of_Daze
             seraphinaCollisionRect = new Rectangle(seraphinaTextureRect.X + 10, seraphinaTextureRect.Y - 20, seraphinaTextureRect.Width - 20, seraphinaTextureRect.Height - 26);
             aldyTextureRect = new Rectangle(455, 610, 30, 40);
             aldyCollisionRect = new Rectangle(yukiTextureRect.X + 10, yukiTextureRect.Y - 20, yukiTextureRect.Width - 20, yukiTextureRect.Height - 26);
-            satanTextureRect = new Rectangle(455, 610, 30, 40);
-            satanCollisionRect = new Rectangle(seraphinaTextureRect.X + 10, seraphinaTextureRect.Y - 20, seraphinaTextureRect.Width - 20, seraphinaTextureRect.Height - 26);
+            azraelTextureRect = new Rectangle(455, 610, 30, 40);
+            azraelCollisionRect = new Rectangle(seraphinaTextureRect.X + 10, seraphinaTextureRect.Y - 20, seraphinaTextureRect.Width - 20, seraphinaTextureRect.Height - 26);
 
             // Buttons
             playButtonRect = new Rectangle(550, 60, 120, 50);
@@ -2188,15 +2188,15 @@ namespace Veil_of_Daze
             aldyLeft = Content.Load<Texture2D>("Aldy_left");
             aldyRight = Content.Load<Texture2D>("Aldy_right");
 
-            satanForward = Content.Load<Texture2D>("Satan_forward");
-            satanBackward = Content.Load<Texture2D>("Satan_backward");
-            satanLeft = Content.Load<Texture2D>("Satan_left");
-            satanRight = Content.Load<Texture2D>("Satan_right");
+            azraelForward = Content.Load<Texture2D>("Azrael_forward");
+            azraelBackward = Content.Load<Texture2D>("Azrael_backward");
+            azraelLeft = Content.Load<Texture2D>("Azrael_left");
+            azraelRight = Content.Load<Texture2D>("Azrael_right");
 
             currentYuki = yukiForward;
             currentSeraphina = seraphinaForward;
             currentAldy = aldyForward;
-            currentSatan = satanForward;
+            currentAzrael = azraelForward;
 
             // Buttons
             playButton = Content.Load<Texture2D>("playbutton");
