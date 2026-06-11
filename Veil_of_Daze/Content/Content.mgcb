@@ -37,6 +37,18 @@
 /processorParam:TextureFormat=Color
 /build:Aldy_backward.png
 
+#begin Aldy_Card.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Aldy_Card.png
+
 #begin Aldy_forward.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -336,6 +348,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Seraphina_backward.png
+
+#begin Seraphina_Card.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Seraphina_Card.png
 
 #begin Seraphina_forward.png
 /importer:TextureImporter

@@ -66,6 +66,16 @@ namespace Veil_of_Daze
         Texture2D inactivePortal;
         Rectangle inactivePortalRect;
 
+        // Character Cards
+        Texture2D yukiCard;
+        Rectangle yukiCardRect;
+        Texture2D seraphinaCard;
+        Rectangle seraphinaCardRect;
+        Texture2D aldyCard;
+        Rectangle aldyCardRect;
+        Texture2D azraelCard;
+        Rectangle azraelCardRect;
+
         // Characters
         Texture2D currentCharacter;
         Texture2D currentCharacterForward;
@@ -206,6 +216,12 @@ namespace Veil_of_Daze
             // Exit Portals
             activePortalRect = new Rectangle(740, 110, 70, 90);
             inactivePortalRect = new Rectangle(740, 110, 70, 90);
+
+            // Character Cards
+            yukiCardRect = new Rectangle();
+            seraphinaCardRect = new Rectangle();
+            aldyCardRect = new Rectangle();
+            azraelCardRect = new Rectangle();
 
             // Characters 
             yukiTextureRect = new Rectangle(455, 610, 30, 40);
