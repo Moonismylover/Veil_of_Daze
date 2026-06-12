@@ -17,6 +17,7 @@ namespace Veil_of_Daze
             main,
             menu,
             chamberOfLegends,
+            characterProfiles,
             veilOfDaze,
             endGame
         }
@@ -33,10 +34,16 @@ namespace Veil_of_Daze
         bool treasureTwoCollected = false;
         bool treasureThreeCollected = false;
 
+        bool storyBtnYuki = false;
+        bool storyBtnSeraphina = false;
+        bool storyBtnAldy = false;
+        bool storyBtnAzrael = false;
+
         // Backgrounds
         Texture2D introBg;
         Texture2D menuBg;
         Texture2D chamberOfLegendsBg;
+        Texture2D characterProfilesBg;
 
         // Text & Titles
         Texture2D veilOfDazeTitle;
@@ -47,6 +54,9 @@ namespace Veil_of_Daze
 
         Texture2D chamberOfLegendsTitle;
         Rectangle chamberOfLegendsTitleRect;
+
+        Texture2D colText;
+        Rectangle colTextRect;
 
         // Walls
         List<Rectangle> walls;
@@ -127,6 +137,42 @@ namespace Veil_of_Daze
         Texture2D quitButton;
         Rectangle quitButtonRect;
 
+        Texture2D quitTwoButton;
+        Rectangle quitTwoButtonRect;
+
+        Texture2D returnButton;
+        Rectangle returnButtonRect;
+
+        Texture2D homeButtom;
+        Rectangle homeButtonRect;
+
+        Texture2D menuButton;
+        Rectangle menuButtonRect;
+
+        Texture2D storyButtonYuki;
+        Rectangle storyButtonYukiRect;
+
+        Texture2D storyButtonSeraphina;
+        Rectangle storyButtonSeraphinaRect;
+
+        Texture2D storyButtonAldy;
+        Rectangle storyButtonAldyRect;
+
+        Texture2D storyButtonAzrael;
+        Rectangle storyButtonAzraelRect;
+
+
+
+        // Character Profiles
+        Texture2D yukiProfile;
+        Rectangle yukiProfileRect;
+        Texture2D seraphinaProfile;
+        Rectangle seraphinaProfileRect;
+        Texture2D aldyProfile;
+        Rectangle aldyProfileRect;
+        Texture2D azraelProfile;
+        Rectangle azraelProfileRect;
+
         // Time 
         float seconds;
 
@@ -181,12 +227,13 @@ namespace Veil_of_Daze
             _graphics.ApplyChanges();
 
             // Text & Titles
-            veilOfDazeTitleRect = new Rectangle(220, 35, 500, 300);
+            veilOfDazeTitleRect = new Rectangle(40, 130, 500, 300);
             settingsTitleRect = new Rectangle(300, 20, 300, 70);
-            chamberOfLegendsTitleRect = new Rectangle(125, 20, 650, 80);
+            chamberOfLegendsTitleRect = new Rectangle(125, 25, 650, 80);
+            colTextRect = new Rectangle(360, 110, 190, 30);
 
             // Visual elements
-            butterflyRect = new Rectangle(60, 250, 150, 150);
+            //butterflyRect = new Rectangle(60, 250, 150, 150);
 
             // Spotlights
             spotlightRect = spotlightRect = spotlightRect = new Rectangle(yukiTextureRect.Center.X - 1000, yukiTextureRect.Center.Y - 1000, 4500, 2500);
@@ -218,10 +265,10 @@ namespace Veil_of_Daze
             inactivePortalRect = new Rectangle(740, 110, 70, 90);
 
             // Character Cards
-            yukiCardRect = new Rectangle();
-            seraphinaCardRect = new Rectangle();
-            aldyCardRect = new Rectangle();
-            azraelCardRect = new Rectangle();
+            yukiCardRect = new Rectangle(25, 150, 200, 300);
+            seraphinaCardRect = new Rectangle(250, 150, 200, 300);
+            aldyCardRect = new Rectangle(475, 150, 200, 300);
+            azraelCardRect = new Rectangle(700, 150, 200, 300);
 
             // Characters 
             yukiTextureRect = new Rectangle(455, 610, 30, 40);
@@ -237,6 +284,20 @@ namespace Veil_of_Daze
             playButtonRect = new Rectangle(550, 60, 120, 50);
             settingsButtonRect = new Rectangle(550, 120, 120, 50);
             quitButtonRect = new Rectangle(550, 180, 120, 50);
+            quitTwoButtonRect = new Rectangle(610, 40, 190, 50);
+            //homeButtonRect = new Rectangle(590, 40, 190, 50);
+            returnButtonRect = new Rectangle(160, 40, 190, 50);
+
+            storyButtonYukiRect = new Rectangle(48, 460, 150, 45);
+            storyButtonSeraphinaRect = new Rectangle(275, 460, 150, 45);
+            storyButtonAldyRect = new Rectangle(500, 460, 150, 45);
+            storyButtonAzraelRect = new Rectangle(725, 460, 150, 45);
+
+            // Character Profiles
+            yukiProfileRect = new Rectangle(90, 30, 750, 570);
+            seraphinaProfileRect = new Rectangle(90, 30, 750, 570);
+            aldyProfileRect = new Rectangle(90, 30, 750, 570);
+            azraelProfileRect = new Rectangle(90, 30, 750, 570);
 
             // Walls
             walls = new List<Rectangle>();
@@ -2164,14 +2225,16 @@ namespace Veil_of_Daze
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // Backgrounds
-            introBg = Content.Load<Texture2D>("intro_bg");
+            introBg = Content.Load<Texture2D>("Bg_intro");
             //menuBg = Content.Load<Texture2D>("menubg");
             chamberOfLegendsBg = Content.Load<Texture2D>("chamberoflegends_bg");
+            characterProfilesBg = Content.Load<Texture2D>("characterProfiles_Bg");
 
             // Text & Titles
             veilOfDazeTitle = Content.Load<Texture2D>("title_veilofdaze");
             settingsTitle = Content.Load<Texture2D>("settings_title");
             chamberOfLegendsTitle = Content.Load<Texture2D>("title_chamberoflegends");
+            colText = Content.Load<Texture2D>("COL_text");
 
             // Visual elements
             butterfly = Content.Load<Texture2D>("butterfly");
@@ -2181,12 +2244,17 @@ namespace Veil_of_Daze
             treasureThree = Content.Load<Texture2D>("orangetreasure");
 
             // Spotlights
-            blackScreen = Content.Load<Texture2D>("blackScreen");
             spotlight = Content.Load<Texture2D>("qwert");
 
             // Exit Portals
             activePortal = Content.Load<Texture2D>("active_portal");
             inactivePortal = Content.Load<Texture2D>("inactive_portal");
+
+            // Character cards
+            yukiCard = Content.Load<Texture2D>("Yuki_Card");    
+            aldyCard = Content.Load<Texture2D>("Aldy_Card");
+            seraphinaCard = Content.Load<Texture2D>("Seraphina_Card");
+            azraelCard = Content.Load<Texture2D>("Azrael_Card");
 
             // Characters 
             yukiForward = Content.Load<Texture2D>("Yuki_forward");
@@ -2218,6 +2286,20 @@ namespace Veil_of_Daze
             playButton = Content.Load<Texture2D>("playbutton");
             settingsButton = Content.Load<Texture2D>("settingsbutton");
             quitButton = Content.Load<Texture2D>("quitbutton");
+            storyButtonYuki = Content.Load<Texture2D>("story_btn");
+            storyButtonSeraphina = Content.Load<Texture2D>("story_btn");
+            storyButtonAldy = Content.Load<Texture2D>("story_btn");
+            storyButtonAzrael = Content.Load<Texture2D>("story_btn");
+            quitTwoButton = Content.Load<Texture2D>("quit_two_btn");
+            returnButton = Content.Load<Texture2D>("return_btn");
+            homeButtom = Content.Load<Texture2D>("home_btn");
+            menuButton = Content.Load<Texture2D>("menu_btn");
+
+            // Character Profiles
+            yukiProfile = Content.Load<Texture2D>("Yuki_profile");
+            seraphinaProfile = Content.Load<Texture2D>("Seraphina_profile");
+            aldyProfile = Content.Load<Texture2D>("Aldy_profile");
+            azraelProfile = Content.Load<Texture2D>("Azrael_profile");
 
             // Rectangle for debugging
             rectTexture = Content.Load<Texture2D>("rectangle");
@@ -2288,7 +2370,50 @@ namespace Veil_of_Daze
 
             else if (screen == Screen.chamberOfLegends)
             {
+                if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && storyButtonYukiRect.Contains(mouseState.Position))
+                {
+                    storyBtnYuki = true;
+                    storyBtnSeraphina = false;
+                    storyBtnAldy = false;
+                    storyBtnAzrael = false;
+                    screen = Screen.characterProfiles; 
+                }
+                else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && storyButtonSeraphinaRect.Contains(mouseState.Position))
+                {
+                    storyBtnSeraphina = true;
+                    storyBtnYuki = false;
+                    storyBtnAldy = false;
+                    storyBtnAzrael = false;
+                    screen = Screen.characterProfiles;
+                }
+                else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && storyButtonAldyRect.Contains(mouseState.Position))
+                {
+                    storyBtnAldy = true;
+                    storyBtnSeraphina = false;
+                    storyBtnYuki = false;
+                    storyBtnAzrael = false;
+                    screen = Screen.characterProfiles;
+                }
+                else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && storyButtonAzraelRect.Contains(mouseState.Position))
+                {
+                    storyBtnAzrael = true;
+                    storyBtnAldy = false;
+                    storyBtnSeraphina = false;
+                    storyBtnYuki = false;
+                    screen = Screen.characterProfiles;
+                }
+            }
 
+            else if (screen == Screen.characterProfiles)
+            {
+                if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && returnButtonRect.Contains(mouseState.Position))
+                {
+                    screen = Screen.chamberOfLegends;
+                }
+                else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && quitTwoButtonRect.Contains(mouseState.Position))
+                {
+                    Exit();
+                }
             }
 
             else if (screen == Screen.veilOfDaze)
@@ -2318,7 +2443,7 @@ namespace Veil_of_Daze
                 }
                 else if (KeyboardState.IsKeyDown(Keys.S) || KeyboardState.IsKeyDown(Keys.Down))
                 {
-                    currentCharacter = currentCharacterBackward;    
+                    currentCharacter = currentCharacterBackward;
                     currentCharacterCollisionRect.Y += 2;
 
                     //currentYuki = yukiBackward;
@@ -2520,6 +2645,40 @@ namespace Veil_of_Daze
             {
                 _spriteBatch.Draw(chamberOfLegendsBg, window, Color.White);
                 _spriteBatch.Draw(chamberOfLegendsTitle, chamberOfLegendsTitleRect, Color.White);
+                _spriteBatch.Draw(colText, colTextRect, Color.White);
+                _spriteBatch.Draw(yukiCard, yukiCardRect, Color.White);
+                _spriteBatch.Draw(aldyCard, aldyCardRect, Color.White);
+                _spriteBatch.Draw(seraphinaCard, seraphinaCardRect, Color.White);
+                _spriteBatch.Draw(azraelCard, azraelCardRect, Color.White);
+                _spriteBatch.Draw(storyButtonYuki, storyButtonYukiRect, Color.White);
+                _spriteBatch.Draw(storyButtonSeraphina, storyButtonSeraphinaRect, Color.White);
+                _spriteBatch.Draw(storyButtonAldy, storyButtonAldyRect, Color.White);
+                _spriteBatch.Draw(storyButtonAzrael, storyButtonAzraelRect, Color.White);
+            }
+
+            else if (screen == Screen.characterProfiles)
+            {
+                _spriteBatch.Draw(characterProfilesBg, window, Color.White);
+                _spriteBatch.Draw(quitTwoButton, quitTwoButtonRect, Color.White);
+                _spriteBatch.Draw(homeButtom, homeButtonRect, Color.White);
+                _spriteBatch.Draw(returnButton, returnButtonRect, Color.White);
+
+                if (storyBtnYuki == true)
+                {
+                    _spriteBatch.Draw(yukiProfile, yukiProfileRect, Color.White);
+                }
+                else if (storyBtnSeraphina == true)
+                {
+                    _spriteBatch.Draw(seraphinaProfile, seraphinaProfileRect, Color.White);
+                }
+                else if (storyBtnAldy == true)
+                {
+                    _spriteBatch.Draw(aldyProfile, aldyProfileRect, Color.White);
+                }
+                else if (storyBtnAzrael == true)
+                {
+                    _spriteBatch.Draw(azraelProfile, azraelProfileRect, Color.White);
+                }
             }
 
             else if (screen == Screen.veilOfDaze)

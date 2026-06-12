@@ -21,6 +21,8 @@
     <None Remove="Content\exa.png" />
     <None Remove="Content\exaa.png" />
     <None Remove="Content\exaaa.png" />
+    <None Remove="Content\intro_bg.jpg" />
+    <None Remove="Content\Intro_bg.png" />
     <None Remove="Content\Satan_backward.png" />
     <None Remove="Content\Satan_forward.png" />
     <None Remove="Content\Satan_left.png" />
