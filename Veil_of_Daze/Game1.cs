@@ -285,8 +285,9 @@ namespace Veil_of_Daze
             settingsButtonRect = new Rectangle(550, 120, 120, 50);
             quitButtonRect = new Rectangle(550, 180, 120, 50);
             quitTwoButtonRect = new Rectangle(610, 40, 190, 50);
-            //homeButtonRect = new Rectangle(590, 40, 190, 50);
+            homeButtonRect = new Rectangle(170, 510, 200, 50);
             returnButtonRect = new Rectangle(160, 40, 190, 50);
+            menuButtonRect = new Rectangle(400, 510, 200, 60);
 
             storyButtonYukiRect = new Rectangle(48, 460, 150, 45);
             storyButtonSeraphinaRect = new Rectangle(275, 460, 150, 45);
@@ -2654,13 +2655,15 @@ namespace Veil_of_Daze
                 _spriteBatch.Draw(storyButtonSeraphina, storyButtonSeraphinaRect, Color.White);
                 _spriteBatch.Draw(storyButtonAldy, storyButtonAldyRect, Color.White);
                 _spriteBatch.Draw(storyButtonAzrael, storyButtonAzraelRect, Color.White);
+                _spriteBatch.Draw(quitTwoButton, new Rectangle(630, 510, 190, 60), Color.White);
+                _spriteBatch.Draw(homeButtom, homeButtonRect, Color.White);
+                _spriteBatch.Draw(menuButton, menuButtonRect, Color.White);
             }
 
             else if (screen == Screen.characterProfiles)
             {
                 _spriteBatch.Draw(characterProfilesBg, window, Color.White);
                 _spriteBatch.Draw(quitTwoButton, quitTwoButtonRect, Color.White);
-                _spriteBatch.Draw(homeButtom, homeButtonRect, Color.White);
                 _spriteBatch.Draw(returnButton, returnButtonRect, Color.White);
 
                 if (storyBtnYuki == true)
