@@ -64,6 +64,8 @@ namespace Veil_of_Daze
 
         // Transportation Portals
         List<Rectangle> transportationPortals;
+        int destinationPortal;
+        Rectangle destinationPortalRect;
 
         // Spotlights
         Texture2D spotlight;
@@ -210,6 +212,7 @@ namespace Veil_of_Daze
 
         int spotNum;
 
+        // Random
         Random generator = new Random();
 
         // Mouse & Keyboard
@@ -316,13 +319,11 @@ namespace Veil_of_Daze
             transportationPortals.Add(new Rectangle(490, 0, 30, 10));
             transportationPortals.Add(new Rectangle(820, 0, 30, 10));
             transportationPortals.Add(new Rectangle(920, 40, 10, 30));
-            transportationPortals.Add(new Rectangle(920, 60, 10, 30));
             transportationPortals.Add(new Rectangle(920, 160, 10, 30));
             transportationPortals.Add(new Rectangle(0, 290, 10, 30));
             transportationPortals.Add(new Rectangle(0, 400, 10, 30));
+            transportationPortals.Add(new Rectangle(0, 60, 10, 30));
             transportationPortals.Add(new Rectangle(920, 420, 10, 30));
-
-
 
             // Walls
             walls = new List<Rectangle>();
@@ -2546,8 +2547,22 @@ namespace Veil_of_Daze
                 }
 
                 // Transportation Portal
+                foreach (Rectangle transportationPortal in transportationPortals)
+                {
+                    if (currentCharacterCollisionRect.Intersects(transportationPortal))
+                    {
+                        destinationPortal = generator.Next(transportationPortals.Count);
+                        destinationPortalRect = transportationPortals[destinationPortal];
 
-                
+                        currentCharacterTextureRect.X = destinationPortalRect.X + 10;
+                        currentCharacterTextureRect.Y = destinationPortalRect.Y;
+
+                        currentCharacterCollisionRect.X = destinationPortalRect.X + 10;
+                        currentCharacterCollisionRect.Y = destinationPortalRect.Y;
+
+                        break;
+                    }
+                }
 
                 // Spotlight Position Sync
 
