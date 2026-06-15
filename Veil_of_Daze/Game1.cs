@@ -14,12 +14,12 @@ namespace Veil_of_Daze
 
         enum Screen
         {
-            main,
+            home,
             menu,
             chamberOfLegends,
             characterProfiles,
             veilOfDaze,
-            endGame
+            end
         }
 
         // !!!!!!!!!!!!!! REMOVE RECTANGLE COLLISON
@@ -142,7 +142,8 @@ namespace Veil_of_Daze
         Rectangle quitButtonRect;
 
         Texture2D quitTwoButton;
-        Rectangle quitTwoButtonRect;
+        Rectangle quitTwoButtonRectOne;
+        Rectangle quitTwoButtonRectTwo;
 
         Texture2D returnButton;
         Rectangle returnButtonRect;
@@ -224,7 +225,7 @@ namespace Veil_of_Daze
 
         protected override void Initialize()
         {
-            screen = Screen.main;
+            screen = Screen.home;
 
             window = new Rectangle(0, 0, 930, 630);
             _graphics.PreferredBackBufferWidth = 930;
@@ -286,10 +287,13 @@ namespace Veil_of_Daze
             playButtonRect = new Rectangle(700, 70, 160, 60);
             menuButtonRect = new Rectangle(700, 140, 160, 60);
             quitButtonRect = new Rectangle(700, 210, 160, 60);
-            quitTwoButtonRect = new Rectangle(610, 40, 190, 50);
-            homeButtonRect = new Rectangle(170, 510, 200, 50);
+
+            quitTwoButtonRectOne = new Rectangle(610, 40, 190, 50);
+            quitTwoButtonRectTwo = new Rectangle(610, 510, 200, 50);
             returnButtonRect = new Rectangle(160, 40, 190, 50);
-            menuTwoButtonRect = new Rectangle(400, 510, 200, 60);
+
+            homeButtonRect = new Rectangle(130, 510, 200, 50);
+            menuTwoButtonRect = new Rectangle(370, 510, 200, 50);
 
             storyButtonYukiRect = new Rectangle(48, 460, 150, 45);
             storyButtonSeraphinaRect = new Rectangle(275, 460, 150, 45);
@@ -2322,7 +2326,7 @@ namespace Veil_of_Daze
 
             seconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (screen == Screen.main)
+            if (screen == Screen.home)
             {
                 if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && playButtonRect.Contains(mouseState.Position))
                 {
@@ -2384,6 +2388,7 @@ namespace Veil_of_Daze
                     currentCharacterRight = yukiRight;
                     currentCharacterTextureRect = yukiTextureRect;
                     currentCharacterCollisionRect = yukiCollisionRect;
+                    screen = Screen.veilOfDaze;
                 }
                 else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && seraphinaCardRect.Contains(mouseState.Position))
                 {
@@ -2394,6 +2399,7 @@ namespace Veil_of_Daze
                     currentCharacterRight = seraphinaRight;
                     currentCharacterTextureRect = seraphinaTextureRect;
                     currentCharacterCollisionRect = seraphinaCollisionRect;
+                    screen = Screen.veilOfDaze;
                 }
                 else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && aldyCardRect.Contains(mouseState.Position))
                 {
@@ -2404,6 +2410,7 @@ namespace Veil_of_Daze
                     currentCharacterRight = aldyRight;
                     currentCharacterTextureRect = aldyTextureRect;
                     currentCharacterCollisionRect = aldyCollisionRect;
+                    screen = Screen.veilOfDaze;
                 }
                 else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && azraelCardRect.Contains(mouseState.Position))
                 {
@@ -2414,11 +2421,10 @@ namespace Veil_of_Daze
                     currentCharacterRight = azraelRight;
                     currentCharacterTextureRect = azraelTextureRect;
                     currentCharacterCollisionRect = azraelCollisionRect;
+                    screen = Screen.veilOfDaze;
                 }
 
-
-
-                // Character Profile click
+                // Character Story Clicks
                 if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && storyButtonYukiRect.Contains(mouseState.Position))
                 {
                     storyBtnYuki = true;
@@ -2451,6 +2457,20 @@ namespace Veil_of_Daze
                     storyBtnYuki = false;
                     screen = Screen.characterProfiles;
                 }
+
+                // Button Clicks
+                if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && homeButtonRect.Contains(mouseState.Position))
+                {
+                    screen = Screen.home;
+                }
+                else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && menuTwoButtonRect.Contains(mouseState.Position))
+                {
+                    screen = Screen.menu;
+                }
+                else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && quitTwoButtonRectTwo.Contains(mouseState.Position))
+                {
+                    Exit();
+                }
             }
 
             else if (screen == Screen.characterProfiles)
@@ -2459,7 +2479,7 @@ namespace Veil_of_Daze
                 {
                     screen = Screen.chamberOfLegends;
                 }
-                else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && quitTwoButtonRect.Contains(mouseState.Position))
+                else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && quitTwoButtonRectOne.Contains(mouseState.Position))
                 {
                     Exit();
                 }
@@ -2649,17 +2669,17 @@ namespace Veil_of_Daze
                 // Portal Activation
                 if (currentCharacterCollisionRect.Intersects(activePortalRect) && treasureacquired)
                 {
-                    screen = Screen.endGame;
+                    screen = Screen.end;
                 }
                 //if (yukiCollisionRect.Intersects(activePortalRect) && treasureacquired)
                 //{
-                //    screen = Screen.endGame;
+                //    screen = Screen.end;
                 //}
                 //else if (seraphinaCollisionRect.Intersects(activePortalRect) && treasureacquired)
                 //{
-                //    screen = Screen.endGame;
+                //    screen = Screen.end;
                 //}
-                else if (screen == Screen.endGame)
+                else if (screen == Screen.end)
                 {
 
                 }
@@ -2676,7 +2696,7 @@ namespace Veil_of_Daze
 
             _spriteBatch.Begin();
 
-            if (screen == Screen.main)
+            if (screen == Screen.home)
             {
                 _spriteBatch.Draw(homeBg, window, Color.White);
                 _spriteBatch.Draw(veilOfDazeTitle, veilOfDazeTitleRect, Color.White);
@@ -2705,15 +2725,15 @@ namespace Veil_of_Daze
                 _spriteBatch.Draw(storyButtonSeraphina, storyButtonSeraphinaRect, Color.White);
                 _spriteBatch.Draw(storyButtonAldy, storyButtonAldyRect, Color.White);
                 _spriteBatch.Draw(storyButtonAzrael, storyButtonAzraelRect, Color.White);
-                _spriteBatch.Draw(quitTwoButton, new Rectangle(630, 510, 190, 60), Color.White);
+                _spriteBatch.Draw(quitTwoButton, quitTwoButtonRectTwo, Color.White);
                 _spriteBatch.Draw(homeButton, homeButtonRect, Color.White);
-                _spriteBatch.Draw(menuButton, menuButtonRect, Color.White);
+                _spriteBatch.Draw(menuTwoButton, menuTwoButtonRect, Color.White);
             }
 
             else if (screen == Screen.characterProfiles)
             {
                 _spriteBatch.Draw(characterProfilesBg, window, Color.White);
-                _spriteBatch.Draw(quitTwoButton, quitTwoButtonRect, Color.White);
+                _spriteBatch.Draw(quitTwoButton, quitTwoButtonRectOne, Color.White);
                 _spriteBatch.Draw(returnButton, returnButtonRect, Color.White);
 
                 if (storyBtnYuki == true)
@@ -2763,7 +2783,7 @@ namespace Veil_of_Daze
 
             }
 
-            else if (screen == Screen.endGame)
+            else if (screen == Screen.end)
             {
                 _spriteBatch.Draw(endBg, window, Color.White);
             }
