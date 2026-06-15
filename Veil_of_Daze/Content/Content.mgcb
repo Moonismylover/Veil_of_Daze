@@ -217,6 +217,30 @@
 /processorParam:TextureFormat=Color
 /build:chamberoflegends_bg.png
 
+#begin CHAMBEROFLEGENDS_BG.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:CHAMBEROFLEGENDS_BG.png
+
+#begin CHARACTERPROFILE_BG.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:CHARACTERPROFILE_BG.png
+
 #begin characterProfiles_Bg.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -240,6 +264,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:COL_text.png
+
+#begin END_BG.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:END_BG.png
 
 #begin exaaaa.png
 /importer:TextureImporter
@@ -277,6 +313,18 @@
 /processorParam:TextureFormat=Color
 /build:fr.png
 
+#begin HOME_BG.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:HOME_BG.png
+
 #begin home_btn.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -300,6 +348,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:inactive_portal.png
+
+#begin MENU_BG.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:MENU_BG.png
 
 #begin menu_btn.png
 /importer:TextureImporter
