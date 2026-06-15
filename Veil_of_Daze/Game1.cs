@@ -50,14 +50,14 @@ namespace Veil_of_Daze
         Texture2D veilOfDazeTitle;
         Rectangle veilOfDazeTitleRect;
 
-        Texture2D settingsTitle;
-        Rectangle settingsTitleRect;
+        Texture2D menuTitle;
+        Rectangle menuTitleRect;
 
         Texture2D chamberOfLegendsTitle;
         Rectangle chamberOfLegendsTitleRect;
 
-        Texture2D colText;
-        Rectangle colTextRect;
+        Texture2D chamberOfLegendsText;
+        Rectangle chamberOfLegendsTextRect;
 
         // Walls
         List<Rectangle> walls;
@@ -2375,7 +2375,48 @@ namespace Veil_of_Daze
             else if (screen == Screen.chamberOfLegends)
             {
                 // Character Selection
-                if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && yukiProfileRect()
+                if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && yukiCardRect.Contains(mouseState.Position))
+                {
+                    currentCharacter = currentYuki;
+                    currentCharacterForward = yukiForward;
+                    currentCharacterBackward = yukiBackward;
+                    currentCharacterLeft = yukiLeft;
+                    currentCharacterRight = yukiRight;
+                    currentCharacterTextureRect = yukiTextureRect;
+                    currentCharacterCollisionRect = yukiCollisionRect;
+                }
+                else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && seraphinaCardRect.Contains(mouseState.Position))
+                {
+                    currentCharacter = currentSeraphina;
+                    currentCharacterForward = seraphinaForward;
+                    currentCharacterBackward = seraphinaBackward;
+                    currentCharacterLeft = seraphinaLeft;
+                    currentCharacterRight = seraphinaRight;
+                    currentCharacterTextureRect = seraphinaTextureRect;
+                    currentCharacterCollisionRect = seraphinaCollisionRect;
+                }
+                else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && aldyCardRect.Contains(mouseState.Position))
+                {
+                    currentCharacter = currentAldy;
+                    currentCharacterForward = aldyForward;
+                    currentCharacterBackward = aldyBackward;
+                    currentCharacterLeft = aldyLeft;
+                    currentCharacterRight = aldyRight;
+                    currentCharacterTextureRect = aldyTextureRect;
+                    currentCharacterCollisionRect = aldyCollisionRect;
+                }
+                else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && azraelCardRect.Contains(mouseState.Position))
+                {
+                    currentCharacter = currentAzrael;
+                    currentCharacterForward = azraelForward;
+                    currentCharacterBackward = azraelBackward;
+                    currentCharacterLeft = azraelLeft;
+                    currentCharacterRight = azraelRight;
+                    currentCharacterTextureRect = azraelTextureRect;
+                    currentCharacterCollisionRect = azraelCollisionRect;
+                }
+
+
 
                 // Character Profile click
                 if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && storyButtonYukiRect.Contains(mouseState.Position))
@@ -2422,7 +2463,7 @@ namespace Veil_of_Daze
                 {
                     Exit();
                 }
-                else if (mouse)
+                //else if (mouseState.)
             }
 
             else if (screen == Screen.veilOfDaze)
