@@ -16,13 +16,16 @@
     <None Remove="Content\Aldy_forward.png" />
     <None Remove="Content\Aldy_left.png" />
     <None Remove="Content\Aldy_right.png" />
+    <None Remove="Content\CHAMBEROFLEGENDS_BG.png" />
     <None Remove="Content\chamberoflegends_title.png" />
+    <None Remove="Content\CHARACTERPROFILE_BG.png" />
     <None Remove="Content\character_title.png" />
     <None Remove="Content\exa.png" />
     <None Remove="Content\exaa.png" />
     <None Remove="Content\exaaa.png" />
     <None Remove="Content\intro_bg.jpg" />
     <None Remove="Content\Intro_bg.png" />
+    <None Remove="Content\MENU_BG.png" />
     <None Remove="Content\Satan_backward.png" />
     <None Remove="Content\Satan_forward.png" />
     <None Remove="Content\Satan_left.png" />
