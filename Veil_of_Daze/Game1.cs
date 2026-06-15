@@ -62,6 +62,9 @@ namespace Veil_of_Daze
         // Walls
         List<Rectangle> walls;
 
+        // Transportation Portals
+        List<Rectangle> transportationPortals;
+
         // Spotlights
         Texture2D spotlight;
         Rectangle spotlightRect;
@@ -305,6 +308,21 @@ namespace Veil_of_Daze
             seraphinaProfileRect = new Rectangle(90, 30, 750, 570);
             aldyProfileRect = new Rectangle(90, 30, 750, 570);
             azraelProfileRect = new Rectangle(90, 30, 750, 570);
+
+            // Transportation Portals
+
+            transportationPortals = new List<Rectangle>();
+            transportationPortals.Add(new Rectangle(250, 0, 30, 10));
+            transportationPortals.Add(new Rectangle(490, 0, 30, 10));
+            transportationPortals.Add(new Rectangle(820, 0, 30, 10));
+            transportationPortals.Add(new Rectangle(920, 40, 10, 30));
+            transportationPortals.Add(new Rectangle(920, 60, 10, 30));
+            transportationPortals.Add(new Rectangle(920, 160, 10, 30));
+            transportationPortals.Add(new Rectangle(0, 290, 10, 30));
+            transportationPortals.Add(new Rectangle(0, 400, 10, 30));
+            transportationPortals.Add(new Rectangle(920, 420, 10, 30));
+
+
 
             // Walls
             walls = new List<Rectangle>();
@@ -2492,7 +2510,7 @@ namespace Veil_of_Daze
                 currentCharacterTextureRect.X = currentCharacterCollisionRect.X - 10;
                 currentCharacterTextureRect.Y = currentCharacterCollisionRect.Y - 20;
                
-                // 
+                // Character Position Tracker
                 Rectangle oldPosition = currentCharacterCollisionRect;
 
                 // Sprite Movement
@@ -2526,6 +2544,10 @@ namespace Veil_of_Daze
                         break;
                     }
                 }
+
+                // Transportation Portal
+
+                
 
                 // Spotlight Position Sync
 
@@ -2658,6 +2680,11 @@ namespace Veil_of_Daze
                 foreach (Rectangle wall in walls)
                 {
                     _spriteBatch.Draw(bush, wall, Color.White);
+                }
+
+                foreach (Rectangle transportationPortal in transportationPortals)
+                {
+                    _spriteBatch.Draw(rectTexture, transportationPortal, Color.Blue);
                 }
 
                 _spriteBatch.Draw(treasureOne, treasureOneRect, Color.White);
