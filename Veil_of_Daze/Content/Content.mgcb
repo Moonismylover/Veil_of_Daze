@@ -169,18 +169,6 @@
 /processorParam:TextureFormat=Color
 /build:Azrael_right.png
 
-#begin Bg_intro.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Bg_intro.png
-
 #begin blackScreen.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -192,30 +180,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:blackScreen.png
-
-#begin butterfly.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:butterfly.png
-
-#begin chamberoflegends_bg.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:chamberoflegends_bg.png
 
 #begin CHAMBEROFLEGENDS_BG.png
 /importer:TextureImporter
@@ -229,6 +193,18 @@
 /processorParam:TextureFormat=Color
 /build:CHAMBEROFLEGENDS_BG.png
 
+#begin chamberOfLegendsTitle.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:chamberOfLegendsTitle.png
+
 #begin CHARACTERPROFILE_BG.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -240,18 +216,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:CHARACTERPROFILE_BG.png
-
-#begin characterProfiles_Bg.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:characterProfiles_Bg.png
 
 #begin COL_text.png
 /importer:TextureImporter
@@ -289,18 +253,6 @@
 /processorParam:TextureFormat=Color
 /build:exaaaa.png
 
-#begin flower.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:flower.png
-
 #begin fr.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -325,7 +277,7 @@
 /processorParam:TextureFormat=Color
 /build:HOME_BG.png
 
-#begin home_btn.png
+#begin homeButton.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -335,7 +287,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:home_btn.png
+/build:homeButton.png
 
 #begin inactive_portal.png
 /importer:TextureImporter
@@ -349,6 +301,18 @@
 /processorParam:TextureFormat=Color
 /build:inactive_portal.png
 
+#begin mapButton.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:mapButton.png
+
 #begin MENU_BG.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -361,7 +325,7 @@
 /processorParam:TextureFormat=Color
 /build:MENU_BG.png
 
-#begin menu_btn.png
+#begin menuButton.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -371,9 +335,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:menu_btn.png
+/build:menuButton.png
 
-#begin musicbutton.png
+#begin menuTitle.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -383,9 +347,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:musicbutton.png
+/build:menuTitle.png
 
-#begin mutebutton.png
+#begin menuTwoButton.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -395,7 +359,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:mutebutton.png
+/build:menuTwoButton.png
 
 #begin orangetreasure.png
 /importer:TextureImporter
@@ -421,7 +385,7 @@
 /processorParam:TextureFormat=Color
 /build:pinktreasure.png
 
-#begin play_btn.png
+#begin playButton.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -431,19 +395,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:play_btn.png
-
-#begin playbutton.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:playbutton.png
+/build:playButton.png
 
 #begin purpletreasure.png
 /importer:TextureImporter
@@ -457,7 +409,7 @@
 /processorParam:TextureFormat=Color
 /build:purpletreasure.png
 
-#begin quit_two_btn.png
+#begin quitButton.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -467,9 +419,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:quit_two_btn.png
+/build:quitButton.png
 
-#begin quitbutton.png
+#begin quitTwoButton.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -479,7 +431,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:quitbutton.png
+/build:quitTwoButton.png
 
 #begin qwert.png
 /importer:TextureImporter
@@ -505,7 +457,7 @@
 /processorParam:TextureFormat=Color
 /build:rectangle.png
 
-#begin return_btn.png
+#begin returnButton.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -515,7 +467,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:return_btn.png
+/build:returnButton.png
 
 #begin Seraphina_backward.png
 /importer:TextureImporter
@@ -589,42 +541,6 @@
 /processorParam:TextureFormat=Color
 /build:Seraphina_right.png
 
-#begin settings_title.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:settings_title.png
-
-#begin settingsbutton.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:settingsbutton.png
-
-#begin spotlight.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:spotlight.png
-
 #begin story_btn.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -637,42 +553,6 @@
 /processorParam:TextureFormat=Color
 /build:story_btn.png
 
-#begin title_chamberoflegends.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:title_chamberoflegends.png
-
-#begin title_character.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:title_character.png
-
-#begin title_veilofdaze.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:title_veilofdaze.png
-
 #begin Untitled design.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -684,6 +564,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Untitled design.png
+
+#begin veilOfDazeTitle.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:veilOfDazeTitle.png
 
 #begin Yuki_backward.png
 /importer:TextureImporter
