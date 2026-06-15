@@ -2231,8 +2231,8 @@ namespace Veil_of_Daze
             homeBg = Content.Load<Texture2D>("HOME_BG");
             menuBg = Content.Load<Texture2D>("MENU_BG");
             chamberOfLegendsBg = Content.Load<Texture2D>("CHAMBEROFLEGENDS_BG");
-            characterProfilesBg = Content.Load<Texture2D>("MENU_BG");
-            endBg = Content.Load<Texture2D>("END_BG");
+            characterProfilesBg = Content.Load<Texture2D>("characterProfiles_Bg");
+            //endBg = Content.Load<Texture2D>("END_BG");
 
             // Text & Titles
             veilOfDazeTitle = Content.Load<Texture2D>("veilOfDazeTitle");

@@ -20,6 +20,7 @@
     <None Remove="Content\chamberoflegends_title.png" />
     <None Remove="Content\CHARACTERPROFILE_BG.png" />
     <None Remove="Content\character_title.png" />
+    <None Remove="Content\END_BG.png" />
     <None Remove="Content\exa.png" />
     <None Remove="Content\exaa.png" />
     <None Remove="Content\exaaa.png" />
