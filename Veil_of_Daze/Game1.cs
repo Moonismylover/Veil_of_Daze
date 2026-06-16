@@ -2761,19 +2761,6 @@ namespace Veil_of_Daze
             {
                 _spriteBatch.Draw(veilOfDazeBg, window, Color.White);
 
-                if (treasureOneCollected)
-                {
-                    _spriteBatch.Draw(treasureCollectedOne, treasureCollectedOneRect, Color.White);
-                }
-                if (treasureTwoCollected)
-                {
-                    _spriteBatch.Draw(treasureCollectedTwo, treasureCollectedTwoRect, Color.White);
-                }
-                if (treasureThreeCollected)
-                {
-                    _spriteBatch.Draw(treasureCollectedThree, treasureCollectedThreeRect, Color.White);
-                }
-
                 foreach (Rectangle wall in walls)
                 {
                     _spriteBatch.Draw(bush, wall, Color.White);
@@ -2801,6 +2788,19 @@ namespace Veil_of_Daze
 
                 _spriteBatch.Draw(currentCharacter, currentCharacterTextureRect, Color.White);
                 _spriteBatch.Draw(rectTexture, currentCharacterCollisionRect, Color.White);
+
+                if (treasureOneCollected)
+                {
+                    _spriteBatch.Draw(treasureCollectedOne, treasureCollectedOneRect, Color.White);
+                }
+                if (treasureTwoCollected)
+                {
+                    _spriteBatch.Draw(treasureCollectedTwo, treasureCollectedTwoRect, Color.White);
+                }
+                if (treasureThreeCollected)
+                {
+                    _spriteBatch.Draw(treasureCollectedThree, treasureCollectedThreeRect, Color.White);
+                }
             }
 
             else if (screen == Screen.end)
