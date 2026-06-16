@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 
 namespace Veil_of_Daze
@@ -245,7 +246,7 @@ namespace Veil_of_Daze
             chamberOfLegendsTextRect = new Rectangle(360, 110, 190, 30);
 
             // Spotlights
-            spotlightRect = spotlightRect = spotlightRect = new Rectangle(yukiTextureRect.Center.X - 1000, yukiTextureRect.Center.Y - 1000, 4500, 2500);
+            spotlightRect = new Rectangle(yukiTextureRect.Center.X - 1000, yukiTextureRect.Center.Y - 1000, 4500, 2500);
 
             // Treasure Boxes
             treasureOneRect = new Rectangle(490, 440, 20, 20);
@@ -281,13 +282,13 @@ namespace Veil_of_Daze
 
             // Characters 
             yukiTextureRect = new Rectangle(455, 610, 30, 40);
-            yukiCollisionRect = new Rectangle(yukiTextureRect.X + 10, yukiTextureRect.Y - 20, yukiTextureRect.Width - 20, yukiTextureRect.Height - 26);
+            yukiCollisionRect = new Rectangle(yukiTextureRect.X + 10, yukiTextureRect.Y + 20, yukiTextureRect.Width - 20, yukiTextureRect.Height - 26);
             seraphinaTextureRect = new Rectangle(455, 610, 30, 40);
-            seraphinaCollisionRect = new Rectangle(seraphinaTextureRect.X + 10, seraphinaTextureRect.Y - 20, seraphinaTextureRect.Width - 20, seraphinaTextureRect.Height - 26);
+            seraphinaCollisionRect = new Rectangle(seraphinaTextureRect.X + 10, seraphinaTextureRect.Y + 20, seraphinaTextureRect.Width - 20, seraphinaTextureRect.Height - 26);
             aldyTextureRect = new Rectangle(455, 610, 30, 40);
-            aldyCollisionRect = new Rectangle(yukiTextureRect.X + 10, yukiTextureRect.Y - 20, yukiTextureRect.Width - 20, yukiTextureRect.Height - 26);
+            aldyCollisionRect = new Rectangle(aldyTextureRect.X + 10, aldyTextureRect.Y + 20, aldyTextureRect.Width - 20, aldyTextureRect.Height - 26);
             azraelTextureRect = new Rectangle(455, 610, 30, 40);
-            azraelCollisionRect = new Rectangle(seraphinaTextureRect.X + 10, seraphinaTextureRect.Y - 20, seraphinaTextureRect.Width - 20, seraphinaTextureRect.Height - 26);
+            azraelCollisionRect = new Rectangle(azraelTextureRect.X + 10, azraelTextureRect.Y + 20, azraelTextureRect.Width - 20, azraelTextureRect.Height - 26);
 
             // Buttons
             playButtonRect = new Rectangle(700, 70, 160, 60);
@@ -314,15 +315,17 @@ namespace Veil_of_Daze
 
             // Transportation Portals
             transportationPortals = new List<Rectangle>();
-            transportationPortals.Add(new Rectangle(250, 0, 30, 10));
-            transportationPortals.Add(new Rectangle(490, 0, 30, 10));
-            transportationPortals.Add(new Rectangle(820, 0, 30, 10));
-            transportationPortals.Add(new Rectangle(920, 40, 10, 30));
-            transportationPortals.Add(new Rectangle(920, 160, 10, 30));
-            transportationPortals.Add(new Rectangle(920, 420, 10, 30));
-            transportationPortals.Add(new Rectangle(0, 290, 10, 30));
-            transportationPortals.Add(new Rectangle(0, 400, 10, 30));
-            transportationPortals.Add(new Rectangle(0, 60, 10, 30));
+            transportationPortals.Add(new Rectangle(250, -20, 30, 30));
+            transportationPortals.Add(new Rectangle(490, -20, 30, 30));
+            transportationPortals.Add(new Rectangle(820,-20, 30, 30));
+            transportationPortals.Add(new Rectangle(920, 40, 30, 30));
+            transportationPortals.Add(new Rectangle(920, 160, 30, 30));
+            transportationPortals.Add(new Rectangle(920, 420, 30, 30));
+            transportationPortals.Add(new Rectangle(-20, 290, 30, 30));
+            transportationPortals.Add(new Rectangle(-20, 400, 30, 30));
+            transportationPortals.Add(new Rectangle(-20, 60, 30, 30));
+
+            #region Define Walls
 
             // Walls
             walls = new List<Rectangle>();
@@ -2240,6 +2243,8 @@ namespace Veil_of_Daze
             walls.Add(new Rectangle(910, 620, 10, 10));
             walls.Add(new Rectangle(920, 620, 10, 10));
 
+            #endregion
+
             seconds = 0;
 
             base.Initialize();
@@ -2507,8 +2512,7 @@ namespace Veil_of_Daze
             else if (screen == Screen.veilOfDaze)
             {
                 // Texture & Collision Rectangle Position Sync
-                currentCharacterTextureRect.X = currentCharacterCollisionRect.X - 10;
-                currentCharacterTextureRect.Y = currentCharacterCollisionRect.Y - 20;
+                
                
                 // Character Position Tracker
                 Rectangle oldPosition = currentCharacterCollisionRect;
@@ -2534,6 +2538,7 @@ namespace Veil_of_Daze
                     currentCharacter = currentCharacterRight;
                     currentCharacterCollisionRect.X += 2;
                 }
+                UpdateTextureRect();
 
                 // Collision Detection
                 foreach (Rectangle wall in walls)
@@ -2541,6 +2546,7 @@ namespace Veil_of_Daze
                     if (currentCharacterCollisionRect.Intersects(wall))
                     {
                         currentCharacterCollisionRect = new Rectangle(oldPosition.X, oldPosition.Y, oldPosition.Width, oldPosition.Height);
+                        UpdateTextureRect();
                         break;
                     }
                 }
@@ -2548,84 +2554,37 @@ namespace Veil_of_Daze
                 // Transportation Portal
                 foreach (Rectangle transportationPortal in transportationPortals)
                 {
-                    if (currentCharacterCollisionRect.Intersects(transportationPortal))
+                    seconds = 0;
+
+                    if (transportationPortal.Contains(currentCharacterCollisionRect) && seconds <= 0)
                     {
                         destinationPortal = generator.Next(transportationPortals.Count);
                         destinationPortalRect = transportationPortals[destinationPortal];
-
                         
-
-                        if (destinationPortal == 0)
+                        // Makes sure portal is different
+                        if (destinationPortalRect == transportationPortal)
                         {
-                            currentCharacterTextureRect.X = destinationPortalRect.X + 40;
-                            currentCharacterTextureRect.Y = destinationPortalRect.Y + 16;
-
-                            currentCharacterCollisionRect.X = destinationPortalRect.X + 40;
-                            currentCharacterCollisionRect.Y = destinationPortalRect.Y + 16;
+                            destinationPortal = (destinationPortal + 1) % transportationPortals.Count;
+                            destinationPortalRect = transportationPortals[destinationPortal];
                         }
-                        else if (destinationPortal == 1)
-                        {
-                            currentCharacterTextureRect.X = destinationPortalRect.X + 40;
-                            currentCharacterTextureRect.Y = destinationPortalRect.Y + 16;
 
-                            currentCharacterCollisionRect.X = destinationPortalRect.X + 40;
-                            currentCharacterCollisionRect.Y = destinationPortalRect.Y + 16;
+                        if (destinationPortal >= 0 && destinationPortal <= 2) // Top
+                        {
+                            currentCharacterCollisionRect.X = destinationPortalRect.Center.X - currentCharacterCollisionRect.Width / 2;
+                            currentCharacterCollisionRect.Y = 0;
+                            UpdateTextureRect();
                         }
-                        else if (destinationPortal == 2)
+                        else if (destinationPortal >= 3 && destinationPortal <= 5) // Right
                         {
-                            currentCharacterTextureRect.X = destinationPortalRect.X - 10;
-                            currentCharacterTextureRect.Y = destinationPortalRect.Y + 16;
-
-                            currentCharacterCollisionRect.X = destinationPortalRect.X - 10;
-                            currentCharacterCollisionRect.Y = destinationPortalRect.Y + 16;
+                            currentCharacterCollisionRect.Y = destinationPortalRect.Center.Y - currentCharacterCollisionRect.Height / 2;
+                            currentCharacterCollisionRect.X = window.Width - currentCharacterCollisionRect.Width;
+                            UpdateTextureRect();
                         }
-                        else if (destinationPortal == 3)
+                        else if (destinationPortal >= 6 && destinationPortal <= 8) // Left
                         {
-                            currentCharacterTextureRect.X = destinationPortalRect.X - 15;
-                            currentCharacterTextureRect.Y = destinationPortalRect.Y + 40;
-
-                            currentCharacterCollisionRect.X = destinationPortalRect.X - 15;
-                            currentCharacterCollisionRect.Y = destinationPortalRect.Y + 40;
-                        }
-                        else if (destinationPortal == 4)
-                        {
-                            currentCharacterTextureRect.X = destinationPortalRect.X - 30;
-                            currentCharacterTextureRect.Y = destinationPortalRect.Y + 16;
-
-                            currentCharacterCollisionRect.X = destinationPortalRect.X - 30;
-                            currentCharacterCollisionRect.Y = destinationPortalRect.Y + 16;
-                        }
-                        else if (destinationPortal == 5)
-                        {
-                            currentCharacterTextureRect.X = destinationPortalRect.X - 30;
-                            currentCharacterTextureRect.Y = destinationPortalRect.Y + 16;
-
-                            currentCharacterCollisionRect.X = destinationPortalRect.X - 30;
-                            currentCharacterCollisionRect.Y = destinationPortalRect.Y + 16;
-                        }
-                        else if (destinationPortal == 6)
-                        {
-                            currentCharacterTextureRect.X = destinationPortalRect.X + 15;
-                            currentCharacterTextureRect.Y = destinationPortalRect.Y + 40;
-
-                            currentCharacterCollisionRect.X = destinationPortalRect.X + 15;
-                            currentCharacterCollisionRect.Y = destinationPortalRect.Y + 40;
-                        }
-                        else if (destinationPortal == 7)
-                        {
-                            currentCharacterTextureRect.X = destinationPortalRect.X + 15;
-                            currentCharacterTextureRect.Y = destinationPortalRect.Y - 10;
-
-                            currentCharacterCollisionRect.X = destinationPortalRect.X + 15;
-                            currentCharacterCollisionRect.Y = destinationPortalRect.Y - 10;
-                        }
-                        else if (destinationPortal == 8)
-                        {
-                            currentCharacterTextureRect.X = destinationPortalRect.X + 40;
-                            currentCharacterTextureRect.Y = destinationPortalRect.Y + 10;
-
-                            currentCharacterCollisionRect.X = destinationPortalRect.X + 40;
-                            currentCharacterCollisionRect.Y = destinationPortalRect.Y + 10;
+                            currentCharacterCollisionRect.Y = destinationPortalRect.Center.Y - currentCharacterCollisionRect.Height / 2;
+                            currentCharacterCollisionRect.X = 0;
+                            UpdateTextureRect();
                         }
 
                         break;
@@ -2655,6 +2614,7 @@ namespace Veil_of_Daze
                     treasureThreeRect = Rectangle.Empty;
                     treasureThreeCollected = true;
                 }
+                UpdateTextureRect();
 
                 treasureacquired = treasureOneCollected && treasureTwoCollected && treasureThreeCollected;
 
@@ -2678,7 +2638,8 @@ namespace Veil_of_Daze
                 {
                     currentCharacterCollisionRect.Y = window.Height - currentCharacterCollisionRect.Height;
                 }
-               
+                UpdateTextureRect();
+
                 // Portal Activation
                 if (currentCharacterCollisionRect.Intersects(activePortalRect) && treasureacquired)
                 {
@@ -2774,7 +2735,7 @@ namespace Veil_of_Daze
                 _spriteBatch.Draw(treasureTwo, treasureTwoRect, Color.White);
                 _spriteBatch.Draw(treasureThree, treasureThreeRect, Color.White);
 
-                //_spriteBatch.Draw(spotlight, spotlightRect, Color.White);
+                _spriteBatch.Draw(spotlight, spotlightRect, Color.White);
 
                 if (treasureacquired)
                 {
@@ -2798,5 +2759,12 @@ namespace Veil_of_Daze
 
             base.Draw(gameTime);
         }
+
+        public void UpdateTextureRect()
+        {
+            currentCharacterTextureRect.X = currentCharacterCollisionRect.X - 10;
+            currentCharacterTextureRect.Y = currentCharacterCollisionRect.Y - 20;
+        }
+
     }
 }
