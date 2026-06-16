@@ -313,17 +313,16 @@ namespace Veil_of_Daze
             azraelProfileRect = new Rectangle(90, 30, 750, 570);
 
             // Transportation Portals
-
             transportationPortals = new List<Rectangle>();
             transportationPortals.Add(new Rectangle(250, 0, 30, 10));
             transportationPortals.Add(new Rectangle(490, 0, 30, 10));
             transportationPortals.Add(new Rectangle(820, 0, 30, 10));
             transportationPortals.Add(new Rectangle(920, 40, 10, 30));
             transportationPortals.Add(new Rectangle(920, 160, 10, 30));
+            transportationPortals.Add(new Rectangle(920, 420, 10, 30));
             transportationPortals.Add(new Rectangle(0, 290, 10, 30));
             transportationPortals.Add(new Rectangle(0, 400, 10, 30));
             transportationPortals.Add(new Rectangle(0, 60, 10, 30));
-            transportationPortals.Add(new Rectangle(920, 420, 10, 30));
 
             // Walls
             walls = new List<Rectangle>();
@@ -2554,11 +2553,80 @@ namespace Veil_of_Daze
                         destinationPortal = generator.Next(transportationPortals.Count);
                         destinationPortalRect = transportationPortals[destinationPortal];
 
-                        currentCharacterTextureRect.X = destinationPortalRect.X + 10;
-                        currentCharacterTextureRect.Y = destinationPortalRect.Y;
+                        
 
-                        currentCharacterCollisionRect.X = destinationPortalRect.X + 10;
-                        currentCharacterCollisionRect.Y = destinationPortalRect.Y;
+                        if (destinationPortal == 0)
+                        {
+                            currentCharacterTextureRect.X = destinationPortalRect.X + 40;
+                            currentCharacterTextureRect.Y = destinationPortalRect.Y + 16;
+
+                            currentCharacterCollisionRect.X = destinationPortalRect.X + 40;
+                            currentCharacterCollisionRect.Y = destinationPortalRect.Y + 16;
+                        }
+                        else if (destinationPortal == 1)
+                        {
+                            currentCharacterTextureRect.X = destinationPortalRect.X + 40;
+                            currentCharacterTextureRect.Y = destinationPortalRect.Y + 16;
+
+                            currentCharacterCollisionRect.X = destinationPortalRect.X + 40;
+                            currentCharacterCollisionRect.Y = destinationPortalRect.Y + 16;
+                        }
+                        else if (destinationPortal == 2)
+                        {
+                            currentCharacterTextureRect.X = destinationPortalRect.X - 10;
+                            currentCharacterTextureRect.Y = destinationPortalRect.Y + 16;
+
+                            currentCharacterCollisionRect.X = destinationPortalRect.X - 10;
+                            currentCharacterCollisionRect.Y = destinationPortalRect.Y + 16;
+                        }
+                        else if (destinationPortal == 3)
+                        {
+                            currentCharacterTextureRect.X = destinationPortalRect.X - 15;
+                            currentCharacterTextureRect.Y = destinationPortalRect.Y + 40;
+
+                            currentCharacterCollisionRect.X = destinationPortalRect.X - 15;
+                            currentCharacterCollisionRect.Y = destinationPortalRect.Y + 40;
+                        }
+                        else if (destinationPortal == 4)
+                        {
+                            currentCharacterTextureRect.X = destinationPortalRect.X - 30;
+                            currentCharacterTextureRect.Y = destinationPortalRect.Y + 16;
+
+                            currentCharacterCollisionRect.X = destinationPortalRect.X - 30;
+                            currentCharacterCollisionRect.Y = destinationPortalRect.Y + 16;
+                        }
+                        else if (destinationPortal == 5)
+                        {
+                            currentCharacterTextureRect.X = destinationPortalRect.X - 30;
+                            currentCharacterTextureRect.Y = destinationPortalRect.Y + 16;
+
+                            currentCharacterCollisionRect.X = destinationPortalRect.X - 30;
+                            currentCharacterCollisionRect.Y = destinationPortalRect.Y + 16;
+                        }
+                        else if (destinationPortal == 6)
+                        {
+                            currentCharacterTextureRect.X = destinationPortalRect.X + 15;
+                            currentCharacterTextureRect.Y = destinationPortalRect.Y + 40;
+
+                            currentCharacterCollisionRect.X = destinationPortalRect.X + 15;
+                            currentCharacterCollisionRect.Y = destinationPortalRect.Y + 40;
+                        }
+                        else if (destinationPortal == 7)
+                        {
+                            currentCharacterTextureRect.X = destinationPortalRect.X + 15;
+                            currentCharacterTextureRect.Y = destinationPortalRect.Y - 10;
+
+                            currentCharacterCollisionRect.X = destinationPortalRect.X + 15;
+                            currentCharacterCollisionRect.Y = destinationPortalRect.Y - 10;
+                        }
+                        else if (destinationPortal == 8)
+                        {
+                            currentCharacterTextureRect.X = destinationPortalRect.X + 40;
+                            currentCharacterTextureRect.Y = destinationPortalRect.Y + 10;
+
+                            currentCharacterCollisionRect.X = destinationPortalRect.X + 40;
+                            currentCharacterCollisionRect.Y = destinationPortalRect.Y + 10;
+                        }
 
                         break;
                     }
@@ -2718,6 +2786,7 @@ namespace Veil_of_Daze
                 }
 
                 _spriteBatch.Draw(currentCharacter, currentCharacterTextureRect, Color.White);
+                _spriteBatch.Draw(rectTexture, currentCharacterCollisionRect, Color.White);
             }
 
             else if (screen == Screen.end)
