@@ -45,6 +45,7 @@ namespace Veil_of_Daze
         Texture2D menuBg;
         Texture2D chamberOfLegendsBg;
         Texture2D characterProfilesBg;
+        Texture2D veilOfDazeBg;
         Texture2D endBg;
 
         // Text & Titles
@@ -60,6 +61,9 @@ namespace Veil_of_Daze
         Texture2D chamberOfLegendsText;
         Rectangle chamberOfLegendsTextRect;
 
+        Texture2D howToPlayText;
+        Rectangle howToPlayTextRect;
+
         // Walls
         List<Rectangle> walls;
 
@@ -72,10 +76,25 @@ namespace Veil_of_Daze
         Texture2D spotlight;
         Rectangle spotlightRect;
 
+        // Quads
+        Rectangle quadOneRect;
+        Rectangle quadTwoRect;
+
         // Visual elements
         Texture2D butterfly;
         Rectangle butterflyRect;
         Texture2D bush;
+        Texture2D map;
+        Rectangle mapRect;
+
+        Texture2D treasureCollectedOne;
+        Rectangle treasureCollectedOneRect;
+
+        Texture2D treasureCollectedTwo;
+        Rectangle treasureCollectedTwoRect;
+
+        Texture2D treasureCollectedThree;
+        Rectangle treasureCollectedThreeRect;
 
         // Exit Portals
         Texture2D activePortal;
@@ -244,9 +263,20 @@ namespace Veil_of_Daze
             menuTitleRect = new Rectangle(300, 20, 300, 70);
             chamberOfLegendsTitleRect = new Rectangle(125, 25, 650, 80);
             chamberOfLegendsTextRect = new Rectangle(360, 110, 190, 30);
+            howToPlayTextRect = new Rectangle(80, 100, 800, 250);
 
             // Spotlights
-            spotlightRect = new Rectangle(yukiTextureRect.Center.X - 1000, yukiTextureRect.Center.Y - 1000, 4500, 2500);
+            spotlightRect = new Rectangle(currentCharacterTextureRect.Center.X - 1000, currentCharacterTextureRect.Center.Y - 1000, 4500, 2500);
+
+            // Quad
+            quadOneRect = new Rectangle(0, 0, 930, 315);
+            quadTwoRect = new Rectangle(0, 315, 930, 315);
+
+            // Visual Elements
+            mapRect = new Rectangle(60, 350, 350, 250);
+            treasureCollectedOneRect = new Rectangle(20, 20, 40, 40);
+            treasureCollectedTwoRect = new Rectangle(70, 20, 40, 40);
+            treasureCollectedThreeRect = new Rectangle(120, 20, 40, 40);
 
             // Treasure Boxes
             treasureOneRect = new Rectangle(490, 440, 20, 20);
@@ -2256,9 +2286,10 @@ namespace Veil_of_Daze
 
             // Backgrounds
             homeBg = Content.Load<Texture2D>("HOME_BG");
-            menuBg = Content.Load<Texture2D>("MENU_BG");
+            menuBg = Content.Load<Texture2D>("menuBg");
             chamberOfLegendsBg = Content.Load<Texture2D>("CHAMBEROFLEGENDS_BG");
             characterProfilesBg = Content.Load<Texture2D>("characterProfiles_Bg");
+            veilOfDazeBg = Content.Load<Texture2D>("veilOfDaze_Bg");
             //endBg = Content.Load<Texture2D>("END_BG");
 
             // Text & Titles
@@ -2266,6 +2297,7 @@ namespace Veil_of_Daze
             menuTitle = Content.Load<Texture2D>("menuTitle");
             chamberOfLegendsTitle = Content.Load<Texture2D>("chamberOfLegendsTitle");
             chamberOfLegendsText = Content.Load<Texture2D>("COL_text");
+            howToPlayText = Content.Load<Texture2D>("howtoplay");
 
             // Visual elements
             butterfly = Content.Load<Texture2D>("butterfly");
@@ -2273,6 +2305,10 @@ namespace Veil_of_Daze
             treasureOne = Content.Load<Texture2D>("pinktreasure");
             treasureTwo = Content.Load<Texture2D>("purpletreasure");
             treasureThree = Content.Load<Texture2D>("orangetreasure");
+            map = Content.Load<Texture2D>("map");
+            treasureCollectedOne = Content.Load<Texture2D>("treasure_collected");
+            treasureCollectedTwo = Content.Load<Texture2D>("treasure_collected");
+            treasureCollectedThree = Content.Load<Texture2D>("treasure_collected");
 
             // Spotlights
             spotlight = Content.Load<Texture2D>("qwert");
@@ -2673,8 +2709,10 @@ namespace Veil_of_Daze
 
             else if (screen == Screen.menu)
             {
-                _spriteBatch.Draw(menuBg, window, Color.White);
+                _spriteBatch.Draw(menuBg, new Rectangle (0, 0, 950, 630), Color.White);
                 _spriteBatch.Draw(menuTitle, menuTitleRect, Color.White);
+                _spriteBatch.Draw(howToPlayText, howToPlayTextRect, Color.White);
+                _spriteBatch.Draw(map, mapRect, Color.White);
             }
 
             else if (screen == Screen.chamberOfLegends)
@@ -2721,6 +2759,21 @@ namespace Veil_of_Daze
 
             else if (screen == Screen.veilOfDaze)
             {
+                _spriteBatch.Draw(veilOfDazeBg, window, Color.White);
+
+                if (treasureOneCollected)
+                {
+                    _spriteBatch.Draw(treasureCollectedOne, treasureCollectedOneRect, Color.White);
+                }
+                if (treasureTwoCollected)
+                {
+                    _spriteBatch.Draw(treasureCollectedTwo, treasureCollectedTwoRect, Color.White);
+                }
+                if (treasureThreeCollected)
+                {
+                    _spriteBatch.Draw(treasureCollectedThree, treasureCollectedThreeRect, Color.White);
+                }
+
                 foreach (Rectangle wall in walls)
                 {
                     _spriteBatch.Draw(bush, wall, Color.White);
