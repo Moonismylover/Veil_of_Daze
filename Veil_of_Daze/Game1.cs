@@ -19,6 +19,7 @@ namespace Veil_of_Daze
             menu,
             chamberOfLegends,
             characterProfiles,
+            map,
             veilOfDaze,
             end
         }
@@ -76,25 +77,18 @@ namespace Veil_of_Daze
         Texture2D spotlight;
         Rectangle spotlightRect;
 
-        // Quads
-        Rectangle quadOneRect;
-        Rectangle quadTwoRect;
-
         // Visual elements
-        Texture2D butterfly;
-        Rectangle butterflyRect;
         Texture2D bush;
         Texture2D map;
         Rectangle mapRect;
 
-        Texture2D treasureCollectedOne;
-        Rectangle treasureCollectedOneRect;
+        Texture2D check;
 
-        Texture2D treasureCollectedTwo;
-        Rectangle treasureCollectedTwoRect;
+        Rectangle checkOneRect;
 
-        Texture2D treasureCollectedThree;
-        Rectangle treasureCollectedThreeRect;
+        Rectangle checkTwoRect;
+
+        Rectangle checkThreeRect;
 
         // Exit Portals
         Texture2D activePortal;
@@ -179,17 +173,13 @@ namespace Veil_of_Daze
         Texture2D homeButton;
         Rectangle homeButtonRect;
 
-        Texture2D storyButtonYuki;
+        Texture2D storyButton;
         Rectangle storyButtonYukiRect;
-
-        Texture2D storyButtonSeraphina;
         Rectangle storyButtonSeraphinaRect;
-
-        Texture2D storyButtonAldy;
         Rectangle storyButtonAldyRect;
-
-        Texture2D storyButtonAzrael;
         Rectangle storyButtonAzraelRect;
+
+
 
         // Character Profiles
         Texture2D yukiProfile;
@@ -206,6 +196,9 @@ namespace Veil_of_Daze
 
         // Time 
         float seconds;
+
+        // Opacity treasureCheck
+        float treasureCheckOpacity;
 
         // Treasure Boxes
         Texture2D treasureOne;
@@ -230,7 +223,9 @@ namespace Veil_of_Daze
         Rectangle treasureThreeSpotThreeRect;
         Rectangle treasureThreeSpotFourRect;
 
+        // int
         int spotNum;
+        int treasuresFound = 0;
 
         // Random
         Random generator = new Random();
@@ -274,11 +269,12 @@ namespace Veil_of_Daze
 
             // Visual Elements
             mapRect = new Rectangle(60, 350, 350, 250);
-            treasureCollectedOneRect = new Rectangle(20, 20, 40, 40);
-            treasureCollectedTwoRect = new Rectangle(70, 20, 40, 40);
-            treasureCollectedThreeRect = new Rectangle(120, 20, 40, 40);
+            checkOneRect = new Rectangle(20, 20, 40, 40);
+            checkTwoRect = new Rectangle(70, 20, 40, 40);
+            checkThreeRect = new Rectangle(120, 20, 40, 40);
 
             // Treasure Boxes
+            treasureCheckOpacity = 1f;
             treasureOneRect = new Rectangle(490, 440, 20, 20);
 
             treasureOneSpotOneRect = new Rectangle(11, 100, 20, 20);
@@ -2286,7 +2282,7 @@ namespace Veil_of_Daze
 
             // Backgrounds
             homeBg = Content.Load<Texture2D>("HOME_BG");
-            menuBg = Content.Load<Texture2D>("menuBg");
+            menuBg = Content.Load<Texture2D>("wee.");
             chamberOfLegendsBg = Content.Load<Texture2D>("CHAMBEROFLEGENDS_BG");
             characterProfilesBg = Content.Load<Texture2D>("characterProfiles_Bg");
             veilOfDazeBg = Content.Load<Texture2D>("veilOfDaze_Bg");
@@ -2300,15 +2296,12 @@ namespace Veil_of_Daze
             howToPlayText = Content.Load<Texture2D>("howtoplay");
 
             // Visual elements
-            butterfly = Content.Load<Texture2D>("butterfly");
             bush = Content.Load<Texture2D>("exaaaa");
             treasureOne = Content.Load<Texture2D>("pinktreasure");
             treasureTwo = Content.Load<Texture2D>("purpletreasure");
             treasureThree = Content.Load<Texture2D>("orangetreasure");
             map = Content.Load<Texture2D>("map");
-            treasureCollectedOne = Content.Load<Texture2D>("treasure_collected");
-            treasureCollectedTwo = Content.Load<Texture2D>("treasure_collected");
-            treasureCollectedThree = Content.Load<Texture2D>("treasure_collected");
+            check = Content.Load<Texture2D>("treasure_collected");
 
             // Spotlights
             spotlight = Content.Load<Texture2D>("qwert");
@@ -2353,10 +2346,7 @@ namespace Veil_of_Daze
             playButton = Content.Load<Texture2D>("playButton");
             menuButton = Content.Load<Texture2D>("menuButton");
             quitButton = Content.Load<Texture2D>("quitButton");
-            storyButtonYuki = Content.Load<Texture2D>("story_btn");
-            storyButtonSeraphina = Content.Load<Texture2D>("story_btn");
-            storyButtonAldy = Content.Load<Texture2D>("story_btn");
-            storyButtonAzrael = Content.Load<Texture2D>("story_btn");
+            storyButton = Content.Load<Texture2D>("story_btn");
             quitTwoButton = Content.Load<Texture2D>("quitTwoButton");
             returnButton = Content.Load<Texture2D>("returnButton");
             homeButton = Content.Load<Texture2D>("homeButton");
@@ -2547,9 +2537,6 @@ namespace Veil_of_Daze
 
             else if (screen == Screen.veilOfDaze)
             {
-                // Texture & Collision Rectangle Position Sync
-                
-               
                 // Character Position Tracker
                 Rectangle oldPosition = currentCharacterCollisionRect;
 
@@ -2637,18 +2624,21 @@ namespace Veil_of_Daze
                 {
                     treasureOneRect = Rectangle.Empty;
                     treasureOneCollected = true;
+                    treasuresFound++;
                 }
 
                 if (currentCharacterCollisionRect.Intersects(treasureTwoRect))
                 {
                     treasureTwoRect = Rectangle.Empty;
                     treasureTwoCollected = true;
+                    treasuresFound++;
                 }
 
                 if (currentCharacterCollisionRect.Intersects(treasureThreeRect))
                 {
                     treasureThreeRect = Rectangle.Empty;
                     treasureThreeCollected = true;
+                    treasuresFound++;
                 }
                 UpdateTextureRect();
 
@@ -2685,6 +2675,15 @@ namespace Veil_of_Daze
                 {
 
                 }
+
+                if (Vector2.Distance(currentCharacterCollisionRect.Center.ToVector2(), checkTwoRect.Center.ToVector2()) > 175)
+                {
+                    treasureCheckOpacity = 1f;
+                }
+                else
+                {
+                    treasureCheckOpacity = 0.3f;
+                }
             }
 
             base.Update(gameTime);
@@ -2701,7 +2700,6 @@ namespace Veil_of_Daze
             {
                 _spriteBatch.Draw(homeBg, window, Color.White);
                 _spriteBatch.Draw(veilOfDazeTitle, veilOfDazeTitleRect, Color.White);
-                _spriteBatch.Draw(butterfly, butterflyRect, Color.White);
                 _spriteBatch.Draw(playButton, playButtonRect, Color.White);
                 _spriteBatch.Draw(menuButton, menuButtonRect, Color.White);
                 _spriteBatch.Draw(quitButton, quitButtonRect, Color.White);
@@ -2724,10 +2722,10 @@ namespace Veil_of_Daze
                 _spriteBatch.Draw(aldyCard, aldyCardRect, Color.White);
                 _spriteBatch.Draw(seraphinaCard, seraphinaCardRect, Color.White);
                 _spriteBatch.Draw(azraelCard, azraelCardRect, Color.White);
-                _spriteBatch.Draw(storyButtonYuki, storyButtonYukiRect, Color.White);
-                _spriteBatch.Draw(storyButtonSeraphina, storyButtonSeraphinaRect, Color.White);
-                _spriteBatch.Draw(storyButtonAldy, storyButtonAldyRect, Color.White);
-                _spriteBatch.Draw(storyButtonAzrael, storyButtonAzraelRect, Color.White);
+                _spriteBatch.Draw(storyButton, storyButtonYukiRect, Color.White);
+                _spriteBatch.Draw(storyButton, storyButtonSeraphinaRect, Color.White);
+                _spriteBatch.Draw(storyButton, storyButtonAldyRect, Color.White);
+                _spriteBatch.Draw(storyButton, storyButtonAzraelRect, Color.White);
                 _spriteBatch.Draw(quitTwoButton, quitTwoButtonRectTwo, Color.White);
                 _spriteBatch.Draw(homeButton, homeButtonRect, Color.White);
                 _spriteBatch.Draw(menuTwoButton, menuTwoButtonRect, Color.White);
@@ -2789,18 +2787,20 @@ namespace Veil_of_Daze
                 _spriteBatch.Draw(currentCharacter, currentCharacterTextureRect, Color.White);
                 _spriteBatch.Draw(rectTexture, currentCharacterCollisionRect, Color.White);
 
-                if (treasureOneCollected)
+               
+                if (treasuresFound >= 1)
                 {
-                    _spriteBatch.Draw(treasureCollectedOne, treasureCollectedOneRect, Color.White);
+                    _spriteBatch.Draw(check, checkOneRect, Color.White * treasureCheckOpacity);
                 }
-                if (treasureTwoCollected)
+                if (treasuresFound >= 2)
                 {
-                    _spriteBatch.Draw(treasureCollectedTwo, treasureCollectedTwoRect, Color.White);
+                    _spriteBatch.Draw(check, checkTwoRect, Color.White * treasureCheckOpacity);
                 }
-                if (treasureThreeCollected)
+                if (treasuresFound >= 3)
                 {
-                    _spriteBatch.Draw(treasureCollectedThree, treasureCollectedThreeRect, Color.White);
+                    _spriteBatch.Draw(check, checkThreeRect, Color.White * treasureCheckOpacity);
                 }
+                
             }
 
             else if (screen == Screen.end)
