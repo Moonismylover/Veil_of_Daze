@@ -263,10 +263,6 @@ namespace Veil_of_Daze
             // Spotlights
             spotlightRect = new Rectangle(currentCharacterTextureRect.Center.X - 1000, currentCharacterTextureRect.Center.Y - 1000, 4500, 2500);
 
-            // Quad
-            quadOneRect = new Rectangle(0, 0, 930, 315);
-            quadTwoRect = new Rectangle(0, 315, 930, 315);
-
             // Visual Elements
             mapRect = new Rectangle(60, 350, 350, 250);
             checkOneRect = new Rectangle(20, 20, 40, 40);
