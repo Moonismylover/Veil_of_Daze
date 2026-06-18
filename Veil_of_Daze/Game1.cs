@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace Veil_of_Daze
 {
@@ -40,6 +41,9 @@ namespace Veil_of_Daze
         bool storyBtnSeraphina = false;
         bool storyBtnAldy = false;
         bool storyBtnAzrael = false;
+
+        bool menuMapClicked = false;
+        bool mapIconClicked = false;
 
         // Backgrounds
         Texture2D homeBg;
@@ -77,11 +81,21 @@ namespace Veil_of_Daze
         Texture2D spotlight;
         Rectangle spotlightRect;
 
-        // Visual elements
+        // Bush
         Texture2D bush;
+
+        // Map
         Texture2D map;
         Rectangle mapRect;
 
+        Texture2D layout;
+
+        Texture2D mapOne;
+        Texture2D mapTwo;
+        Texture2D mapThree;
+        Texture2D mapFour;
+
+        // Check
         Texture2D check;
 
         Rectangle checkOneRect;
@@ -153,25 +167,31 @@ namespace Veil_of_Daze
 
         Texture2D menuButton;
         Rectangle menuButtonRect;
-
         Texture2D menuTwoButton;
         Rectangle menuTwoButtonRect;
+        Texture2D menuIconButton;
+        Rectangle menuIconButtonRect;
 
         Texture2D quitButton;
         Rectangle quitButtonRect;
-
         Texture2D quitTwoButton;
         Rectangle quitTwoButtonRectOne;
         Rectangle quitTwoButtonRectTwo;
+        Rectangle quitTwoButtonRectThree;
 
         Texture2D returnButton;
         Rectangle returnButtonRect;
+        Rectangle returnButtonRectTwo;
+        Rectangle returnButtonRectThree;
 
-        Texture2D mapButton;
-        Rectangle mapButtonRect;
+        Texture2D mapIconButton;
+        Rectangle mapIconButtonRect;
 
         Texture2D homeButton;
         Rectangle homeButtonRect;
+        Texture2D homeIconButton;
+        Rectangle homeIconButtonRect;
+        Rectangle homeIconButtonRectTwo;
 
         Texture2D storyButton;
         Rectangle storyButtonYukiRect;
@@ -179,7 +199,10 @@ namespace Veil_of_Daze
         Rectangle storyButtonAldyRect;
         Rectangle storyButtonAzraelRect;
 
-
+        Texture2D musicEnable;
+        Rectangle musicEnableRect;
+        Texture2D musicDisable;
+        Rectangle musicDisableRect;
 
         // Character Profiles
         Texture2D yukiProfile;
@@ -199,6 +222,8 @@ namespace Veil_of_Daze
 
         // Opacity treasureCheck
         float treasureCheckOpacity;
+        float quitButtonOpacity;
+        float iconButtonOpacity;
 
         // Treasure Boxes
         Texture2D treasureOne;
@@ -263,14 +288,17 @@ namespace Veil_of_Daze
             // Spotlights
             spotlightRect = new Rectangle(currentCharacterTextureRect.Center.X - 1000, currentCharacterTextureRect.Center.Y - 1000, 4500, 2500);
 
-            // Visual Elements
+            // Map
             mapRect = new Rectangle(60, 350, 350, 250);
+
+            // Check
             checkOneRect = new Rectangle(20, 20, 40, 40);
             checkTwoRect = new Rectangle(70, 20, 40, 40);
             checkThreeRect = new Rectangle(120, 20, 40, 40);
 
             // Treasure Boxes
             treasureCheckOpacity = 1f;
+
             treasureOneRect = new Rectangle(490, 440, 20, 20);
 
             treasureOneSpotOneRect = new Rectangle(11, 100, 20, 20);
@@ -313,21 +341,41 @@ namespace Veil_of_Daze
             azraelCollisionRect = new Rectangle(azraelTextureRect.X + 10, azraelTextureRect.Y + 20, azraelTextureRect.Width - 20, azraelTextureRect.Height - 26);
 
             // Buttons
+            iconButtonOpacity = 1f;
+            quitButtonOpacity = 1f;
+
             playButtonRect = new Rectangle(700, 70, 160, 60);
             menuButtonRect = new Rectangle(700, 140, 160, 60);
             quitButtonRect = new Rectangle(700, 210, 160, 60);
 
             quitTwoButtonRectOne = new Rectangle(610, 40, 190, 50);
             quitTwoButtonRectTwo = new Rectangle(610, 510, 200, 50);
+            quitTwoButtonRectThree = new Rectangle(10, 580, 100, 40);
+
             returnButtonRect = new Rectangle(160, 40, 190, 50);
+            returnButtonRectTwo = new Rectangle(370, 7, 190, 50);
+            returnButtonRectThree = new Rectangle(370, 7, 190, 50);
 
             homeButtonRect = new Rectangle(130, 510, 200, 50);
+
             menuTwoButtonRect = new Rectangle(370, 510, 200, 50);
 
             storyButtonYukiRect = new Rectangle(48, 460, 150, 45);
             storyButtonSeraphinaRect = new Rectangle(275, 460, 150, 45);
             storyButtonAldyRect = new Rectangle(500, 460, 150, 45);
             storyButtonAzraelRect = new Rectangle(725, 460, 150, 45);
+
+            menuIconButtonRect = new Rectangle(870, 17, 45, 45);
+            homeIconButtonRect = new Rectangle(810, 17, 45, 45);
+            homeIconButtonRectTwo = new Rectangle(450, 520, 65, 65);
+            mapIconButtonRect = new Rectangle(750, 20, 40, 40);
+
+            musicDisableRect = new Rectangle(450, 380, 60, 60);
+            musicEnableRect = new Rectangle(450, 450, 60, 60);
+
+            checkOneRect = new Rectangle(20, 20, 40, 40);
+            checkTwoRect = new Rectangle(70, 20, 40, 40);
+            checkThreeRect = new Rectangle(120, 20, 40, 40);
 
             // Character Profiles
             yukiProfileRect = new Rectangle(90, 30, 750, 570);
@@ -2291,12 +2339,23 @@ namespace Veil_of_Daze
             chamberOfLegendsText = Content.Load<Texture2D>("COL_text");
             howToPlayText = Content.Load<Texture2D>("howtoplay");
 
-            // Visual elements
+            // Bush
             bush = Content.Load<Texture2D>("exaaaa");
+
+            // Treasures
             treasureOne = Content.Load<Texture2D>("pinktreasure");
             treasureTwo = Content.Load<Texture2D>("purpletreasure");
             treasureThree = Content.Load<Texture2D>("orangetreasure");
+
+            // Map
             map = Content.Load<Texture2D>("map");
+            layout = Content.Load<Texture2D>("layout_map");
+            mapOne = Content.Load<Texture2D>("onemap");
+            mapTwo = Content.Load<Texture2D>("twomap");
+            mapThree = Content.Load<Texture2D>("threemap");
+            mapFour = Content.Load<Texture2D>("fourmap");
+
+            // Check
             check = Content.Load<Texture2D>("treasure_collected");
 
             // Spotlights
@@ -2347,6 +2406,11 @@ namespace Veil_of_Daze
             returnButton = Content.Load<Texture2D>("returnButton");
             homeButton = Content.Load<Texture2D>("homeButton");
             menuTwoButton = Content.Load<Texture2D>("menuTwoButton");
+            mapIconButton = Content.Load<Texture2D>("map_btn");
+            menuIconButton = Content.Load<Texture2D>("menu_btn");
+            homeIconButton = Content.Load<Texture2D>("home_btn");
+            musicDisable = Content.Load<Texture2D>("music_yes");
+            musicEnable = Content.Load<Texture2D>("music_no");
 
             // Character Profiles
             yukiProfile = Content.Load<Texture2D>("Yuki_profile");
@@ -2418,7 +2482,30 @@ namespace Veil_of_Daze
 
             else if (screen == Screen.menu)
             {
+                if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && mapRect.Contains(mouseState.Position))
+                {
+                    screen = Screen.map;
+                    menuMapClicked = true;
+                    mapIconClicked = false;
+                }
 
+                if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && homeIconButtonRectTwo.Contains(mouseState.Position))
+                {
+                    screen = Screen.home;
+                }
+            }
+
+            else if (screen == Screen.map)
+            {
+                if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && returnButtonRectTwo.Contains(mouseState.Position))
+                {
+                    screen = Screen.menu;
+                }
+
+                if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && returnButtonRectThree.Contains(mouseState.Position))
+                {
+                    screen = Screen.veilOfDaze;
+                }
             }
 
             else if (screen == Screen.chamberOfLegends)
@@ -2476,7 +2563,7 @@ namespace Veil_of_Daze
                     storyBtnSeraphina = false;
                     storyBtnAldy = false;
                     storyBtnAzrael = false;
-                    screen = Screen.characterProfiles; 
+                    screen = Screen.characterProfiles;
                 }
                 else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && storyButtonSeraphinaRect.Contains(mouseState.Position))
                 {
@@ -2579,7 +2666,7 @@ namespace Veil_of_Daze
                     {
                         destinationPortal = generator.Next(transportationPortals.Count);
                         destinationPortalRect = transportationPortals[destinationPortal];
-                        
+
                         // Makes sure portal is different
                         if (destinationPortalRect == transportationPortal)
                         {
@@ -2671,7 +2758,9 @@ namespace Veil_of_Daze
                 {
 
                 }
+                UpdateTextureRect();
 
+                // Opacity Setting
                 if (Vector2.Distance(currentCharacterCollisionRect.Center.ToVector2(), checkTwoRect.Center.ToVector2()) > 175)
                 {
                     treasureCheckOpacity = 1f;
@@ -2679,6 +2768,44 @@ namespace Veil_of_Daze
                 else
                 {
                     treasureCheckOpacity = 0.3f;
+                }
+
+                if (Vector2.Distance(currentCharacterCollisionRect.Center.ToVector2(), homeIconButtonRect.Center.ToVector2()) > 175)
+                {
+                    iconButtonOpacity = 1f;
+                }
+                else
+                {
+                    iconButtonOpacity = 0.3f;
+                }
+
+                if (Vector2.Distance(currentCharacterCollisionRect.Center.ToVector2(), quitTwoButtonRectThree.Center.ToVector2()) > 175)
+                {
+                    quitButtonOpacity = 1f;
+                }
+                else
+                {
+                    quitButtonOpacity = 0.3f;
+                }
+
+                // Icons 
+                if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && mapIconButtonRect.Contains(mouseState.Position))
+                {
+                    menuMapClicked = false;
+                    mapIconClicked = true;
+                    screen = Screen.map;
+                }
+                else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && homeIconButtonRect.Contains(mouseState.Position))
+                {
+                    screen = Screen.home;
+                }
+                else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && menuIconButtonRect.Contains(mouseState.Position))
+                {
+                    screen = Screen.menu;
+                }
+                else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && quitTwoButtonRectThree.Contains(mouseState.Position))
+                {
+                    Exit();
                 }
             }
 
@@ -2707,8 +2834,39 @@ namespace Veil_of_Daze
                 _spriteBatch.Draw(menuTitle, menuTitleRect, Color.White);
                 _spriteBatch.Draw(howToPlayText, howToPlayTextRect, Color.White);
                 _spriteBatch.Draw(map, mapRect, Color.White);
+                _spriteBatch.Draw(homeIconButton, homeIconButtonRectTwo, Color.White);
+                _spriteBatch.Draw(musicDisable, musicDisableRect, Color.White);
+                _spriteBatch.Draw(musicEnable, musicEnableRect, Color.White);
             }
-
+            else if (screen == Screen.map)
+            {
+                if (menuMapClicked)
+                {
+                    _spriteBatch.Draw(layout, window, Color.White);
+                    _spriteBatch.Draw(returnButton, returnButtonRectTwo, Color.White);
+                }
+                
+                if (mapIconClicked)
+                {
+                    if (spotNum == 1)
+                    {
+                        _spriteBatch.Draw(mapOne, window, Color.White);
+                    }
+                    else if (spotNum == 2)
+                    {
+                        _spriteBatch.Draw(mapTwo, window, Color.White);
+                    }
+                    else if (spotNum == 3)
+                    {
+                        _spriteBatch.Draw(mapThree, window, Color.White);
+                    }
+                    else if (spotNum == 4)
+                    {
+                        _spriteBatch.Draw(mapFour, window, Color.White);
+                    }
+                    _spriteBatch.Draw(returnButton, returnButtonRectThree, Color.White);
+                }
+            }
             else if (screen == Screen.chamberOfLegends)
             {
                 _spriteBatch.Draw(chamberOfLegendsBg, window, Color.White);
@@ -2783,7 +2941,6 @@ namespace Veil_of_Daze
                 _spriteBatch.Draw(currentCharacter, currentCharacterTextureRect, Color.White);
                 _spriteBatch.Draw(rectTexture, currentCharacterCollisionRect, Color.White);
 
-               
                 if (treasuresFound >= 1)
                 {
                     _spriteBatch.Draw(check, checkOneRect, Color.White * treasureCheckOpacity);
@@ -2796,8 +2953,13 @@ namespace Veil_of_Daze
                 {
                     _spriteBatch.Draw(check, checkThreeRect, Color.White * treasureCheckOpacity);
                 }
-                
+
+                _spriteBatch.Draw(homeIconButton, homeIconButtonRect, Color.White * iconButtonOpacity);
+                _spriteBatch.Draw(menuIconButton, menuIconButtonRect, Color.White * iconButtonOpacity);
+                _spriteBatch.Draw(mapIconButton, mapIconButtonRect, Color.White * iconButtonOpacity);
+                _spriteBatch.Draw(quitButton, quitTwoButtonRectThree, Color.White * quitButtonOpacity);
             }
+
 
             else if (screen == Screen.end)
             {

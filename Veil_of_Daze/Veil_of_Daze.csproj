@@ -16,6 +16,7 @@
     <None Remove="Content\Aldy_forward.png" />
     <None Remove="Content\Aldy_left.png" />
     <None Remove="Content\Aldy_right.png" />
+    <None Remove="Content\Body %2821%29.png" />
     <None Remove="Content\CHAMBEROFLEGENDS_BG.png" />
     <None Remove="Content\chamberoflegends_title.png" />
     <None Remove="Content\CHARACTERPROFILE_BG.png" />
@@ -26,6 +27,15 @@
     <None Remove="Content\exaaa.png" />
     <None Remove="Content\intro_bg.jpg" />
     <None Remove="Content\Intro_bg.png" />
+    <None Remove="Content\layout.png" />
+    <None Remove="Content\mapfour.png" />
+    <None Remove="Content\mapone.png" />
+    <None Remove="Content\mapthree.png" />
+    <None Remove="Content\maptwo.png" />
+    <None Remove="Content\map_four.png" />
+    <None Remove="Content\map_one.png" />
+    <None Remove="Content\map_three.png" />
+    <None Remove="Content\map_two.png" />
     <None Remove="Content\MENU_BG.png" />
     <None Remove="Content\Satan_backward.png" />
     <None Remove="Content\Satan_forward.png" />
