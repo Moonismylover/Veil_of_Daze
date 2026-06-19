@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -20,6 +21,7 @@ namespace Veil_of_Daze
             menu,
             chamberOfLegends,
             characterProfiles,
+            menuMap,
             map,
             veilOfDaze,
             end
@@ -41,9 +43,6 @@ namespace Veil_of_Daze
         bool storyBtnSeraphina = false;
         bool storyBtnAldy = false;
         bool storyBtnAzrael = false;
-
-        bool menuMapClicked = false;
-        bool mapIconClicked = false;
 
         // Backgrounds
         Texture2D homeBg;
@@ -76,6 +75,7 @@ namespace Veil_of_Daze
         List<Rectangle> transportationPortals;
         int destinationPortal;
         Rectangle destinationPortalRect;
+        Texture2D rectTexture;
 
         // Spotlights
         Texture2D spotlight;
@@ -95,6 +95,9 @@ namespace Veil_of_Daze
         Texture2D mapThree;
         Texture2D mapFour;
 
+        Texture2D picture;
+        Rectangle pictureRect;
+
         // Check
         Texture2D check;
 
@@ -103,6 +106,13 @@ namespace Veil_of_Daze
         Rectangle checkTwoRect;
 
         Rectangle checkThreeRect;
+
+        // Results
+        Texture2D victory;
+        Rectangle victoryRect;
+
+        Texture2D defeat;
+        Rectangle defeatRect;
 
         // Exit Portals
         Texture2D activePortal;
@@ -169,11 +179,10 @@ namespace Veil_of_Daze
         Rectangle menuButtonRect;
         Texture2D menuTwoButton;
         Rectangle menuTwoButtonRect;
-        Texture2D menuIconButton;
-        Rectangle menuIconButtonRect;
 
         Texture2D quitButton;
         Rectangle quitButtonRect;
+        Rectangle quitButtonRectTwo;
         Texture2D quitTwoButton;
         Rectangle quitTwoButtonRectOne;
         Rectangle quitTwoButtonRectTwo;
@@ -182,7 +191,6 @@ namespace Veil_of_Daze
         Texture2D returnButton;
         Rectangle returnButtonRect;
         Rectangle returnButtonRectTwo;
-        Rectangle returnButtonRectThree;
 
         Texture2D mapIconButton;
         Rectangle mapIconButtonRect;
@@ -260,7 +268,16 @@ namespace Veil_of_Daze
         MouseState previousMouseState;
         KeyboardState KeyboardState;
 
-        Texture2D rectTexture;
+        // Sound
+
+        SoundEffect introMusic;
+        SoundEffectInstance introMusicInstance;
+
+        SoundEffect mazeMusic;
+        SoundEffectInstance mazeMusicInstance;
+
+        SoundEffect endMusic;
+        SoundEffectInstance endMusicInstance;
 
         public Game1()
         {
@@ -290,6 +307,7 @@ namespace Veil_of_Daze
 
             // Map
             mapRect = new Rectangle(60, 350, 350, 250);
+            pictureRect = new Rectangle(560, 360, 300, 230);
 
             // Check
             checkOneRect = new Rectangle(20, 20, 40, 40);
@@ -320,6 +338,10 @@ namespace Veil_of_Daze
             treasureThreeSpotThreeRect = new Rectangle(300, 600, 20, 20);
             treasureThreeSpotFourRect = new Rectangle(850, 600, 20, 20);
 
+            // Results
+            victoryRect = new Rectangle(50, 50, 450, 250);
+            defeatRect = new Rectangle(50, 50, 470, 270);
+
             // Exit Portals
             activePortalRect = new Rectangle(740, 110, 70, 90);
             inactivePortalRect = new Rectangle(740, 110, 70, 90);
@@ -347,15 +369,14 @@ namespace Veil_of_Daze
             playButtonRect = new Rectangle(700, 70, 160, 60);
             menuButtonRect = new Rectangle(700, 140, 160, 60);
             quitButtonRect = new Rectangle(700, 210, 160, 60);
+            quitButtonRectTwo = new Rectangle(20, 550, 190, 70);
 
             quitTwoButtonRectOne = new Rectangle(610, 40, 190, 50);
             quitTwoButtonRectTwo = new Rectangle(610, 510, 200, 50);
-            quitTwoButtonRectThree = new Rectangle(10, 580, 100, 40);
+            quitTwoButtonRectThree = new Rectangle(10, 570, 140, 50);
 
             returnButtonRect = new Rectangle(160, 40, 190, 50);
             returnButtonRectTwo = new Rectangle(370, 7, 190, 50);
-            returnButtonRectThree = new Rectangle(370, 7, 190, 50);
-
             homeButtonRect = new Rectangle(130, 510, 200, 50);
 
             menuTwoButtonRect = new Rectangle(370, 510, 200, 50);
@@ -365,10 +386,9 @@ namespace Veil_of_Daze
             storyButtonAldyRect = new Rectangle(500, 460, 150, 45);
             storyButtonAzraelRect = new Rectangle(725, 460, 150, 45);
 
-            menuIconButtonRect = new Rectangle(870, 17, 45, 45);
-            homeIconButtonRect = new Rectangle(810, 17, 45, 45);
+            homeIconButtonRect = new Rectangle(870, 17, 45, 45);
             homeIconButtonRectTwo = new Rectangle(450, 520, 65, 65);
-            mapIconButtonRect = new Rectangle(750, 20, 40, 40);
+            mapIconButtonRect = new Rectangle(810, 17, 45, 45);
 
             musicDisableRect = new Rectangle(450, 380, 60, 60);
             musicEnableRect = new Rectangle(450, 450, 60, 60);
@@ -2330,7 +2350,7 @@ namespace Veil_of_Daze
             chamberOfLegendsBg = Content.Load<Texture2D>("CHAMBEROFLEGENDS_BG");
             characterProfilesBg = Content.Load<Texture2D>("characterProfiles_Bg");
             veilOfDazeBg = Content.Load<Texture2D>("veilOfDaze_Bg");
-            //endBg = Content.Load<Texture2D>("END_BG");
+            endBg = Content.Load<Texture2D>("BGend");
 
             // Text & Titles
             veilOfDazeTitle = Content.Load<Texture2D>("veilOfDazeTitle");
@@ -2338,6 +2358,10 @@ namespace Veil_of_Daze
             chamberOfLegendsTitle = Content.Load<Texture2D>("chamberOfLegendsTitle");
             chamberOfLegendsText = Content.Load<Texture2D>("COL_text");
             howToPlayText = Content.Load<Texture2D>("howtoplay");
+
+            // Results
+            victory = Content.Load<Texture2D>("victory_message");
+            defeat = Content.Load<Texture2D>("defeat_message");
 
             // Bush
             bush = Content.Load<Texture2D>("exaaaa");
@@ -2354,6 +2378,7 @@ namespace Veil_of_Daze
             mapTwo = Content.Load<Texture2D>("twomap");
             mapThree = Content.Load<Texture2D>("threemap");
             mapFour = Content.Load<Texture2D>("fourmap");
+            picture = Content.Load<Texture2D>("picture");
 
             // Check
             check = Content.Load<Texture2D>("treasure_collected");
@@ -2407,7 +2432,6 @@ namespace Veil_of_Daze
             homeButton = Content.Load<Texture2D>("homeButton");
             menuTwoButton = Content.Load<Texture2D>("menuTwoButton");
             mapIconButton = Content.Load<Texture2D>("map_btn");
-            menuIconButton = Content.Load<Texture2D>("menu_btn");
             homeIconButton = Content.Load<Texture2D>("home_btn");
             musicDisable = Content.Load<Texture2D>("music_yes");
             musicEnable = Content.Load<Texture2D>("music_no");
@@ -2420,6 +2444,16 @@ namespace Veil_of_Daze
 
             // Rectangle for debugging
             rectTexture = Content.Load<Texture2D>("rectangle");
+
+            // Sound
+            introMusic = Content.Load<SoundEffect>("intro");
+            introMusicInstance = introMusic.CreateInstance();
+
+            mazeMusic = Content.Load<SoundEffect>("maze");
+            mazeMusicInstance = mazeMusic.CreateInstance();
+
+            endMusic = Content.Load<SoundEffect>("end");
+            endMusicInstance = endMusic.CreateInstance();
         }
 
         protected override void Update(GameTime gameTime)
@@ -2437,6 +2471,8 @@ namespace Veil_of_Daze
 
             if (screen == Screen.home)
             {
+                introMusicInstance.Play();
+
                 if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && playButtonRect.Contains(mouseState.Position))
                 {
                     screen = Screen.chamberOfLegends;
@@ -2484,9 +2520,7 @@ namespace Veil_of_Daze
             {
                 if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && mapRect.Contains(mouseState.Position))
                 {
-                    screen = Screen.map;
-                    menuMapClicked = true;
-                    mapIconClicked = false;
+                    screen = Screen.menuMap;
                 }
 
                 if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && homeIconButtonRectTwo.Contains(mouseState.Position))
@@ -2495,14 +2529,17 @@ namespace Veil_of_Daze
                 }
             }
 
-            else if (screen == Screen.map)
+            else if (screen == Screen.menuMap)
             {
                 if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && returnButtonRectTwo.Contains(mouseState.Position))
                 {
                     screen = Screen.menu;
                 }
+            }
 
-                if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && returnButtonRectThree.Contains(mouseState.Position))
+            else if (screen == Screen.map)
+            { 
+                if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && returnButtonRectTwo.Contains(mouseState.Position))
                 {
                     screen = Screen.veilOfDaze;
                 }
@@ -2620,6 +2657,9 @@ namespace Veil_of_Daze
 
             else if (screen == Screen.veilOfDaze)
             {
+                introMusicInstance.Stop();
+                mazeMusicInstance.Play();
+
                 // Character Position Tracker
                 Rectangle oldPosition = currentCharacterCollisionRect;
 
@@ -2698,7 +2738,6 @@ namespace Veil_of_Daze
                 }
 
                 // Spotlight Position Sync
-
                 spotlightRect.X = currentCharacterTextureRect.Center.X - spotlightRect.Width / 2;
                 spotlightRect.Y = currentCharacterTextureRect.Center.Y - spotlightRect.Height / 2;
 
@@ -2791,19 +2830,26 @@ namespace Veil_of_Daze
                 // Icons 
                 if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && mapIconButtonRect.Contains(mouseState.Position))
                 {
-                    menuMapClicked = false;
-                    mapIconClicked = true;
                     screen = Screen.map;
                 }
                 else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && homeIconButtonRect.Contains(mouseState.Position))
                 {
                     screen = Screen.home;
-                }
-                else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && menuIconButtonRect.Contains(mouseState.Position))
-                {
-                    screen = Screen.menu;
+                    mazeMusicInstance.Stop();
+                    introMusicInstance.Play();
                 }
                 else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && quitTwoButtonRectThree.Contains(mouseState.Position))
+                {
+                    screen = Screen.end;
+                }
+            }
+            
+            else if (screen == Screen.end)
+            {
+                mazeMusicInstance.Stop();
+                endMusicInstance.Play();
+
+                if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && quitButtonRectTwo.Contains(mouseState.Position))
                 {
                     Exit();
                 }
@@ -2811,7 +2857,7 @@ namespace Veil_of_Daze
 
             base.Update(gameTime);
         }
-               
+
 
         protected override void Draw(GameTime gameTime)
         {
@@ -2830,43 +2876,43 @@ namespace Veil_of_Daze
 
             else if (screen == Screen.menu)
             {
-                _spriteBatch.Draw(menuBg, new Rectangle (0, 0, 950, 630), Color.White);
+                _spriteBatch.Draw(menuBg, new Rectangle(0, 0, 950, 630), Color.White);
                 _spriteBatch.Draw(menuTitle, menuTitleRect, Color.White);
                 _spriteBatch.Draw(howToPlayText, howToPlayTextRect, Color.White);
                 _spriteBatch.Draw(map, mapRect, Color.White);
                 _spriteBatch.Draw(homeIconButton, homeIconButtonRectTwo, Color.White);
                 _spriteBatch.Draw(musicDisable, musicDisableRect, Color.White);
                 _spriteBatch.Draw(musicEnable, musicEnableRect, Color.White);
+                _spriteBatch.Draw(picture, pictureRect, Color.White);
             }
+
+            else if (screen == Screen.menuMap)
+            {
+                _spriteBatch.Draw(layout, window, Color.White);
+                _spriteBatch.Draw(returnButton, returnButtonRectTwo, Color.White);
+            }
+
             else if (screen == Screen.map)
             {
-                if (menuMapClicked)
+                if (spotNum == 1)
                 {
-                    _spriteBatch.Draw(layout, window, Color.White);
-                    _spriteBatch.Draw(returnButton, returnButtonRectTwo, Color.White);
+                    _spriteBatch.Draw(mapOne, window, Color.White);
                 }
-                
-                if (mapIconClicked)
+                else if (spotNum == 2)
                 {
-                    if (spotNum == 1)
-                    {
-                        _spriteBatch.Draw(mapOne, window, Color.White);
-                    }
-                    else if (spotNum == 2)
-                    {
-                        _spriteBatch.Draw(mapTwo, window, Color.White);
-                    }
-                    else if (spotNum == 3)
-                    {
-                        _spriteBatch.Draw(mapThree, window, Color.White);
-                    }
-                    else if (spotNum == 4)
-                    {
-                        _spriteBatch.Draw(mapFour, window, Color.White);
-                    }
-                    _spriteBatch.Draw(returnButton, returnButtonRectThree, Color.White);
+                    _spriteBatch.Draw(mapTwo, window, Color.White);
                 }
+                else if (spotNum == 3)
+                {
+                    _spriteBatch.Draw(mapThree, window, Color.White);
+                }
+                else if (spotNum == 4)
+                {
+                     _spriteBatch.Draw(mapFour, window, Color.White);
+                }
+                _spriteBatch.Draw(returnButton, returnButtonRectTwo, Color.White);
             }
+
             else if (screen == Screen.chamberOfLegends)
             {
                 _spriteBatch.Draw(chamberOfLegendsBg, window, Color.White);
@@ -2955,20 +3001,27 @@ namespace Veil_of_Daze
                 }
 
                 _spriteBatch.Draw(homeIconButton, homeIconButtonRect, Color.White * iconButtonOpacity);
-                _spriteBatch.Draw(menuIconButton, menuIconButtonRect, Color.White * iconButtonOpacity);
                 _spriteBatch.Draw(mapIconButton, mapIconButtonRect, Color.White * iconButtonOpacity);
                 _spriteBatch.Draw(quitButton, quitTwoButtonRectThree, Color.White * quitButtonOpacity);
             }
 
-
             else if (screen == Screen.end)
             {
                 _spriteBatch.Draw(endBg, window, Color.White);
+                if (treasureacquired)
+                {
+                    _spriteBatch.Draw(victory, victoryRect, Color.White);
+                }
+                else
+                {
+                    _spriteBatch.Draw(defeat, defeatRect, Color.White);
+                }
+                _spriteBatch.Draw(quitButton, quitButtonRectTwo, Color.White);
             }
 
             _spriteBatch.End();
 
-            base.Draw(gameTime);
+                base.Draw(gameTime);
         }
 
         public void UpdateTextureRect()

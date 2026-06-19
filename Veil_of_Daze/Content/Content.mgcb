@@ -169,6 +169,18 @@
 /processorParam:TextureFormat=Color
 /build:Azrael_right.png
 
+#begin BGend.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BGend.png
+
 #begin blackScreen.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -252,6 +264,36 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:COL_text.png
+
+#begin defeat_message.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:defeat_message.png
+
+#begin end.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:end.png
+
+#begin end.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:end.wav
 
 #begin exaaaa.png
 /importer:TextureImporter
@@ -349,6 +391,12 @@
 /processorParam:TextureFormat=Color
 /build:inactive_portal.png
 
+#begin intro.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:intro.wav
+
 #begin layout_map.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -408,6 +456,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:mapButton.png
+
+#begin maze.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:maze.wav
 
 #begin MENU_BG.png
 /importer:TextureImporter
@@ -528,6 +582,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:orangetreasure.png
+
+#begin picture.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:picture.png
 
 #begin pinktreasure.png
 /importer:TextureImporter
@@ -780,6 +846,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:veilOfDazeTitle.png
+
+#begin victory_message.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:victory_message.png
+
+#begin visual.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:visual.png
 
 #begin wee..png
 /importer:TextureImporter
