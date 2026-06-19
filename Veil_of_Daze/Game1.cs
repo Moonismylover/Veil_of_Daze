@@ -209,8 +209,10 @@ namespace Veil_of_Daze
 
         Texture2D musicEnable;
         Rectangle musicEnableRect;
+        Rectangle musicEnableRectTwo;
         Texture2D musicDisable;
         Rectangle musicDisableRect;
+        Rectangle musicDisableRectTwo;
 
         // Character Profiles
         Texture2D yukiProfile;
@@ -388,10 +390,13 @@ namespace Veil_of_Daze
 
             homeIconButtonRect = new Rectangle(870, 17, 45, 45);
             homeIconButtonRectTwo = new Rectangle(450, 520, 65, 65);
+
             mapIconButtonRect = new Rectangle(810, 17, 45, 45);
 
             musicDisableRect = new Rectangle(450, 380, 60, 60);
+            musicDisableRectTwo = new Rectangle(690, 17, 45, 45);
             musicEnableRect = new Rectangle(450, 450, 60, 60);
+            musicEnableRectTwo = new Rectangle(750, 17, 45, 45);
 
             checkOneRect = new Rectangle(20, 20, 40, 40);
             checkTwoRect = new Rectangle(70, 20, 40, 40);
@@ -405,15 +410,15 @@ namespace Veil_of_Daze
 
             // Transportation Portals
             transportationPortals = new List<Rectangle>();
-            transportationPortals.Add(new Rectangle(250, -20, 30, 30));
-            transportationPortals.Add(new Rectangle(490, -20, 30, 30));
-            transportationPortals.Add(new Rectangle(820,-20, 30, 30));
-            transportationPortals.Add(new Rectangle(920, 40, 30, 30));
-            transportationPortals.Add(new Rectangle(920, 160, 30, 30));
-            transportationPortals.Add(new Rectangle(920, 420, 30, 30));
-            transportationPortals.Add(new Rectangle(-20, 290, 30, 30));
-            transportationPortals.Add(new Rectangle(-20, 400, 30, 30));
-            transportationPortals.Add(new Rectangle(-20, 60, 30, 30));
+            transportationPortals.Add(new Rectangle(250, -40, 30, 50));
+            transportationPortals.Add(new Rectangle(490, -40, 30, 50));
+            transportationPortals.Add(new Rectangle(820,-40, 30, 50));
+            transportationPortals.Add(new Rectangle(920, 40, 50, 30));
+            transportationPortals.Add(new Rectangle(920, 160, 50, 30));
+            transportationPortals.Add(new Rectangle(920, 420, 50, 30));
+            transportationPortals.Add(new Rectangle(-40, 290, 50, 30));
+            transportationPortals.Add(new Rectangle(-40, 400, 50, 30));
+            transportationPortals.Add(new Rectangle(-40, 60, 50, 30));
 
             #region Define Walls
 
@@ -2465,7 +2470,7 @@ namespace Veil_of_Daze
             mouseState = Mouse.GetState();
             KeyboardState = Keyboard.GetState();
 
-            this.Window.Title = mouseState.Position.ToString();
+            this.Window.Title = currentCharacterCollisionRect.Height + " " + currentCharacterCollisionRect.Width;
 
             seconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -2527,6 +2532,16 @@ namespace Veil_of_Daze
                 {
                     screen = Screen.home;
                 }
+
+                if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && musicEnableRect.Contains(mouseState.Position))
+                {
+                    introMusicInstance.Play();
+                }
+
+                if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && musicDisableRect.Contains(mouseState.Position))
+                {
+                    introMusicInstance.Stop();
+                }
             }
 
             else if (screen == Screen.menuMap)
@@ -2558,6 +2573,8 @@ namespace Veil_of_Daze
                     currentCharacterTextureRect = yukiTextureRect;
                     currentCharacterCollisionRect = yukiCollisionRect;
                     screen = Screen.veilOfDaze;
+                    introMusicInstance.Stop();
+                    mazeMusicInstance.Play();
                 }
                 else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && seraphinaCardRect.Contains(mouseState.Position))
                 {
@@ -2569,6 +2586,8 @@ namespace Veil_of_Daze
                     currentCharacterTextureRect = seraphinaTextureRect;
                     currentCharacterCollisionRect = seraphinaCollisionRect;
                     screen = Screen.veilOfDaze;
+                    introMusicInstance.Stop();
+                    mazeMusicInstance.Play();
                 }
                 else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && aldyCardRect.Contains(mouseState.Position))
                 {
@@ -2580,6 +2599,8 @@ namespace Veil_of_Daze
                     currentCharacterTextureRect = aldyTextureRect;
                     currentCharacterCollisionRect = aldyCollisionRect;
                     screen = Screen.veilOfDaze;
+                    introMusicInstance.Stop();
+                    mazeMusicInstance.Play();
                 }
                 else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && azraelCardRect.Contains(mouseState.Position))
                 {
@@ -2591,6 +2612,8 @@ namespace Veil_of_Daze
                     currentCharacterTextureRect = azraelTextureRect;
                     currentCharacterCollisionRect = azraelCollisionRect;
                     screen = Screen.veilOfDaze;
+                    introMusicInstance.Stop();
+                    mazeMusicInstance.Play();
                 }
 
                 // Character Story Clicks
@@ -2657,9 +2680,6 @@ namespace Veil_of_Daze
 
             else if (screen == Screen.veilOfDaze)
             {
-                introMusicInstance.Stop();
-                mazeMusicInstance.Play();
-
                 // Character Position Tracker
                 Rectangle oldPosition = currentCharacterCollisionRect;
 
@@ -2700,9 +2720,7 @@ namespace Veil_of_Daze
                 // Transportation Portal
                 foreach (Rectangle transportationPortal in transportationPortals)
                 {
-                    seconds = 0;
-
-                    if (transportationPortal.Contains(currentCharacterCollisionRect) && seconds <= 0)
+                    if (transportationPortal.Contains(currentCharacterCollisionRect))
                     {
                         destinationPortal = generator.Next(transportationPortals.Count);
                         destinationPortalRect = transportationPortals[destinationPortal];
@@ -2717,19 +2735,19 @@ namespace Veil_of_Daze
                         if (destinationPortal >= 0 && destinationPortal <= 2) // Top
                         {
                             currentCharacterCollisionRect.X = destinationPortalRect.Center.X - currentCharacterCollisionRect.Width / 2;
-                            currentCharacterCollisionRect.Y = 0;
+                            currentCharacterCollisionRect.Y = 2;
                             UpdateTextureRect();
                         }
                         else if (destinationPortal >= 3 && destinationPortal <= 5) // Right
                         {
                             currentCharacterCollisionRect.Y = destinationPortalRect.Center.Y - currentCharacterCollisionRect.Height / 2;
-                            currentCharacterCollisionRect.X = window.Width - currentCharacterCollisionRect.Width;
+                            currentCharacterCollisionRect.X = window.Width - currentCharacterCollisionRect.Width - 2;
                             UpdateTextureRect();
                         }
                         else if (destinationPortal >= 6 && destinationPortal <= 8) // Left
                         {
                             currentCharacterCollisionRect.Y = destinationPortalRect.Center.Y - currentCharacterCollisionRect.Height / 2;
-                            currentCharacterCollisionRect.X = 0;
+                            currentCharacterCollisionRect.X = 2;
                             UpdateTextureRect();
                         }
 
@@ -2766,22 +2784,6 @@ namespace Veil_of_Daze
 
                 treasureacquired = treasureOneCollected && treasureTwoCollected && treasureThreeCollected;
 
-                // Boundary Check
-                if (currentCharacterCollisionRect.Left < 0)
-                {
-                    currentCharacterCollisionRect.X = 0;
-                }
-
-                if (currentCharacterCollisionRect.Right > window.Width)
-                {
-                    currentCharacterCollisionRect.X = window.Width - currentCharacterCollisionRect.Width;
-                }
-
-                if (currentCharacterCollisionRect.Top < 0)
-                {
-                    currentCharacterCollisionRect.Y = 0;
-                }
-
                 if (currentCharacterCollisionRect.Bottom > window.Height)
                 {
                     currentCharacterCollisionRect.Y = window.Height - currentCharacterCollisionRect.Height;
@@ -2792,10 +2794,6 @@ namespace Veil_of_Daze
                 if (currentCharacterCollisionRect.Intersects(activePortalRect) && treasureacquired)
                 {
                     screen = Screen.end;
-                }
-                else if (screen == Screen.end)
-                {
-
                 }
                 UpdateTextureRect();
 
@@ -2837,6 +2835,14 @@ namespace Veil_of_Daze
                     screen = Screen.home;
                     mazeMusicInstance.Stop();
                     introMusicInstance.Play();
+                }
+                else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && musicDisableRectTwo.Contains(mouseState.Position))
+                {
+                    mazeMusicInstance.Stop();
+                }
+                else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && musicEnableRectTwo.Contains(mouseState.Position))
+                {
+                    mazeMusicInstance.Play();
                 }
                 else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && quitTwoButtonRectThree.Contains(mouseState.Position))
                 {
@@ -3002,6 +3008,8 @@ namespace Veil_of_Daze
 
                 _spriteBatch.Draw(homeIconButton, homeIconButtonRect, Color.White * iconButtonOpacity);
                 _spriteBatch.Draw(mapIconButton, mapIconButtonRect, Color.White * iconButtonOpacity);
+                _spriteBatch.Draw(musicEnable, musicEnableRectTwo, Color.White * iconButtonOpacity);
+                _spriteBatch.Draw(musicDisable, musicDisableRectTwo, Color.White * iconButtonOpacity);
                 _spriteBatch.Draw(quitButton, quitTwoButtonRectThree, Color.White * quitButtonOpacity);
             }
 
