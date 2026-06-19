@@ -2991,7 +2991,7 @@ namespace Veil_of_Daze
                 }
 
                 _spriteBatch.Draw(currentCharacter, currentCharacterTextureRect, Color.White);
-                _spriteBatch.Draw(rectTexture, currentCharacterCollisionRect, Color.White);
+                //_spriteBatch.Draw(rectTexture, currentCharacterCollisionRect, Color.White);
 
                 if (treasuresFound >= 1)
                 {
